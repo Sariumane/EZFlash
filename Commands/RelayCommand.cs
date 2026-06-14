@@ -1,6 +1,6 @@
 using System.Windows.Input;
 
-namespace WpfMvvmMinimal.Commands;
+namespace EZFlash.Commands;
 
 public class RelayCommand(Action execute, Func<bool>? canExecute = null) : ICommand
 {

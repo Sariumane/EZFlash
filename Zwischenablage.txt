@@ -1,0 +1,9 @@
+Sidebar:        #093156
+Sidebar Hover:  #0D426F
+Sidebar Press:  #062642
+Main BG:        #F4F7FA
+Card BG:        #FFFFFF
+Accent Gelb:    #FFD333
+Text dunkel:    #1C2430
+Text hell:      #FFFFFF
+Border:         #D8E0E8

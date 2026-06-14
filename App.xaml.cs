@@ -1,6 +1,6 @@
 using System.Windows;
 
-namespace WpfMvvmMinimal;
+namespace EZFlash;
 
 public partial class App : Application
 {

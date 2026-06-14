@@ -1,0 +1,27 @@
+﻿<UserControl x:Class="EZFlash.Views.LearnSR"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             Background="{StaticResource MainBackgroundBrush}">
+
+    <Grid Background="{StaticResource MainBackgroundBrush}">
+        <Border Background="#111827"
+                BorderBrush="#334155"
+                BorderThickness="1"
+                CornerRadius="16"
+                Padding="32"
+                MaxWidth="700"
+                MinHeight="320"
+                HorizontalAlignment="Center"
+                VerticalAlignment="Center">
+
+            <StackPanel VerticalAlignment="Center">
+                <TextBlock Text="Das ist die Spaced Repetition Seite"
+                           Foreground="{StaticResource PrimaryTextBrush}"
+                           FontSize="32"
+                           FontWeight="SemiBold"
+                           HorizontalAlignment="Center"/>
+            </StackPanel>
+
+        </Border>
+    </Grid>
+</UserControl>
