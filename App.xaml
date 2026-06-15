@@ -9,6 +9,7 @@
                 <ResourceDictionary Source="Resources/Colors.xaml"/>
                 <ResourceDictionary Source="Resources/Layouts.xaml"/>
                 <ResourceDictionary Source="Resources/ButtonStyles.xaml"/>
+                <ResourceDictionary Source="Resources/DeckListStyle.xaml"/>
             </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>
     </Application.Resources>

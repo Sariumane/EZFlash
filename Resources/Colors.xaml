@@ -12,4 +12,6 @@
     <SolidColorBrush x:Key="PrimaryTextBrush" Color="#F8FAFC"/>
     <SolidColorBrush x:Key="SecondaryTextBrush" Color="#CBD5E1"/>
 
+	<SolidColorBrush x:Key="DeckCoverColor" Color="#FF5F2049"/>
+
 </ResourceDictionary>

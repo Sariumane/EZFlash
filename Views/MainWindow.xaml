@@ -19,10 +19,12 @@
         UseLayoutRounding="True"
         SnapsToDevicePixels="True">
 
-    <!-- Context for Bindings -->
-    <Window.DataContext>
-        <viewModels:MainViewModel />
-    </Window.DataContext>
+    <!-- Definine the Views that ViewModels map to -->
+    <Window.Resources>
+        <DataTemplate DataType="{x:Type viewModels:HomeViewModel}">
+            <views:HomeView />
+        </DataTemplate>
+    </Window.Resources>
 
     <!-- Layout -->
     <Grid>
@@ -46,13 +48,15 @@
 
             <Button Grid.Row="0"
                 Content="Home"
-                Style="{StaticResource SidebarButtonStyle}"/>
+                Style="{StaticResource SidebarButtonStyle}"
+                Click="HomeButton_Click"/>
 
             <Border Grid.Row="1" Background="{StaticResource DividerBrush}"/>
 
             <Button Grid.Row="2"
                 Content="Learn Scheduled"
-                Style="{StaticResource SidebarButtonStyle}"/>
+                Style="{StaticResource SidebarButtonStyle}"
+                Click="LearnSR_Click"/>
 
             <Border Grid.Row="3" Background="{StaticResource DividerBrush}"/>
 
@@ -72,7 +76,11 @@
 
         <!-- Main Content -->
         <Grid Grid.Column="2" Background="{StaticResource MainBackgroundBrush}">
-            <views:HomeView/>
+            <ContentControl 
+                x:Name="MainContent"
+                Grid.Column="2"
+                Background="{StaticResource MainBackgroundBrush}"
+                Content="{Binding CurrentViewModel}"/>
         </Grid>
     </Grid>
 </Window>
