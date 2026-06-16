@@ -25,9 +25,6 @@ public partial class MainWindow : Window
 
 
 
-
-
-
     public MainWindow()
     {
         InitializeComponent();
@@ -46,19 +43,6 @@ public partial class MainWindow : Window
             DwmSetWindowAttribute(hwnd, DWMWA_CAPTION_COLOR, ref captionColor, sizeof(int));
             DwmSetWindowAttribute(hwnd, DWMWA_TEXT_COLOR, ref textColor, sizeof(int));
         };
-    }
-
-
-
-    //Dirty Functions
-    private void LearnSR_Click(object sender, RoutedEventArgs e)
-    {
-        MainContent.Content = new LearnSR();
-    }
-
-    private void HomeButton_Click(object sender, RoutedEventArgs e)
-    {
-        MainContent.Content = new HomeView();
     }
 
 

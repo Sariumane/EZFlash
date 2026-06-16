@@ -30,11 +30,10 @@
                     <ListBox.ItemTemplate>
                         <DataTemplate>
                             <TextBlock Text="{Binding Name}"
-                                       Foreground="{StaticResource PrimaryTextBrush}"
-                                       FontSize="16"/>
+                                           Foreground="{StaticResource PrimaryTextBrush}"
+                                           FontSize="16"/>
                         </DataTemplate>
                     </ListBox.ItemTemplate>
-
                 </ListBox>
             </StackPanel>
         </Border>

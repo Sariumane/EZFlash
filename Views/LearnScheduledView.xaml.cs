@@ -3,9 +3,9 @@
 
 namespace EZFlash.Views
 {
-    public partial class LearnSR : UserControl
+    public partial class LearnScheduledView : UserControl
     {
-        public LearnSR()
+        public LearnScheduledView()
         {
             InitializeComponent();
         }

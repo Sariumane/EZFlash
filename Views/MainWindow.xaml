@@ -24,6 +24,10 @@
         <DataTemplate DataType="{x:Type viewModels:HomeViewModel}">
             <views:HomeView />
         </DataTemplate>
+        
+        <DataTemplate DataType="{x:Type viewModels:LearnScheduledViewModel}">
+            <views:LearnScheduledView />
+        </DataTemplate>
     </Window.Resources>
 
     <!-- Layout -->
@@ -49,14 +53,14 @@
             <Button Grid.Row="0"
                 Content="Home"
                 Style="{StaticResource SidebarButtonStyle}"
-                Click="HomeButton_Click"/>
+                Command="{Binding ShowHomeViewCommand}"/>
 
             <Border Grid.Row="1" Background="{StaticResource DividerBrush}"/>
 
             <Button Grid.Row="2"
                 Content="Learn Scheduled"
                 Style="{StaticResource SidebarButtonStyle}"
-                Click="LearnSR_Click"/>
+                Command="{Binding ShowLearnScheduledViewCommand}"/>
 
             <Border Grid.Row="3" Background="{StaticResource DividerBrush}"/>
 
@@ -76,6 +80,11 @@
 
         <!-- Main Content -->
         <Grid Grid.Column="2" Background="{StaticResource MainBackgroundBrush}">
+            <Grid.ContextMenu>
+                <ContextMenu>
+                    <MenuItem Header="Bearbeiten"/>
+                </ContextMenu>
+            </Grid.ContextMenu>
             <ContentControl 
                 x:Name="MainContent"
                 Grid.Column="2"

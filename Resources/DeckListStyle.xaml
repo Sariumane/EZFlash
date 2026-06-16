@@ -16,6 +16,13 @@
                         CornerRadius="8"
                         Padding="16"
                         SnapsToDevicePixels="True">
+						<Border.ContextMenu>
+							<ContextMenu>
+								<MenuItem Header="Lernen" />
+								<MenuItem Header="Bearbeiten" />
+								<MenuItem Header="Löschen" />
+							</ContextMenu>
+						</Border.ContextMenu>
 
                         <ContentPresenter />
                     </Border>
