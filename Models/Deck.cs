@@ -19,9 +19,9 @@ namespace EZFlash.Models
 
         public Deck(string name) => this.Name = name;
 
-        public void AddCard(Card card)
+        public void AddCard(string front, string back)
         {
-            Cards.Add(card);
+            Cards.Add(new(front, back));
         }
 
         public void RemoveCard(Card card)
@@ -29,11 +29,12 @@ namespace EZFlash.Models
             Cards.Remove(card);
         }
 
-        public IEnumerable<Card> GetDueCards(DateTime UtcNow)
+        public ObservableCollection<Card> GetDueCards(DateTime UtcNow)
         {
-            return Cards
+            return new ObservableCollection<Card>(
+                Cards
                 .Where(card => card.NextReviewDate <= DateTime.UtcNow)
-                .OrderBy(card => card.NextReviewDate);
+                .OrderBy(card => card.NextReviewDate));
         }
     }
 }

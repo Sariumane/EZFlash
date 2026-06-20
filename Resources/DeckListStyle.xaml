@@ -18,9 +18,10 @@
                         SnapsToDevicePixels="True">
 						<Border.ContextMenu>
 							<ContextMenu>
-								<MenuItem Header="Lernen" />
-								<MenuItem Header="Bearbeiten" />
-								<MenuItem Header="Löschen" />
+								<MenuItem Header="Learn Scheduled" />
+                                <MenuItem Header="Learn Free" />
+								<MenuItem Header="Edit" />
+								<MenuItem Header="Delete" />
 							</ContextMenu>
 						</Border.ContextMenu>
 

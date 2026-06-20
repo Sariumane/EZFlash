@@ -28,6 +28,10 @@
         <DataTemplate DataType="{x:Type viewModels:LearnScheduledViewModel}">
             <views:LearnScheduledView />
         </DataTemplate>
+
+        <DataTemplate DataType="{x:Type viewModels:CardManagementViewModel}">
+            <views:CardManagementView />
+        </DataTemplate>
     </Window.Resources>
 
     <!-- Layout -->
@@ -65,8 +69,9 @@
             <Border Grid.Row="3" Background="{StaticResource DividerBrush}"/>
 
             <Button Grid.Row="4"
-                Content="Free Learn"
-                Style="{StaticResource SidebarButtonStyle}"/>
+                Content="Card Management"
+                Style="{StaticResource SidebarButtonStyle}"
+                Command="{Binding ShowCardManagementViewCommand}"/>    
 
             <Border Grid.Row="5" Background="{StaticResource DividerBrush}"/>
 
@@ -80,11 +85,6 @@
 
         <!-- Main Content -->
         <Grid Grid.Column="2" Background="{StaticResource MainBackgroundBrush}">
-            <Grid.ContextMenu>
-                <ContextMenu>
-                    <MenuItem Header="Bearbeiten"/>
-                </ContextMenu>
-            </Grid.ContextMenu>
             <ContentControl 
                 x:Name="MainContent"
                 Grid.Column="2"

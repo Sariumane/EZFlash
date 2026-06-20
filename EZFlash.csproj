@@ -23,4 +23,13 @@
     </Resource>
   </ItemGroup>
 
+  <ItemGroup>
+    <Compile Update="ViewModels\CardManagementViewModel.cs">
+      <Generator>MSBuild:Compile</Generator>
+    </Compile>
+    <Compile Update="ViewModels\CreateOrEditCardViewModel.cs">
+      <Generator>MSBuild:Compile</Generator>
+    </Compile>
+  </ItemGroup>
+
 </Project>

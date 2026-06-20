@@ -1,0 +1,294 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+
+    <!-- Brushes -->
+    <SolidColorBrush x:Key="CardManagement.PageBackgroundBrush" Color="#0B1222" />
+    <SolidColorBrush x:Key="CardManagement.CardBackgroundBrush" Color="#111A2E" />
+    <SolidColorBrush x:Key="CardManagement.CardBorderBrush" Color="#334155" />
+
+    <SolidColorBrush x:Key="CardManagement.PrimaryTextBrush" Color="#F8FAFC" />
+    <SolidColorBrush x:Key="CardManagement.SecondaryTextBrush" Color="#94A3B8" />
+    <SolidColorBrush x:Key="CardManagement.MutedTextBrush" Color="#64748B" />
+
+    <SolidColorBrush x:Key="CardManagement.AccentBrush" Color="#38BDF8" />
+    <SolidColorBrush x:Key="CardManagement.AccentHoverBrush" Color="#0EA5E9" />
+
+    <SolidColorBrush x:Key="CardManagement.ButtonBackgroundBrush" Color="#1E293B" />
+    <SolidColorBrush x:Key="CardManagement.ButtonHoverBrush" Color="#334155" />
+    <SolidColorBrush x:Key="CardManagement.ButtonPressedBrush" Color="#475569" />
+
+    <SolidColorBrush x:Key="CardManagement.DangerBackgroundBrush" Color="#2A1720" />
+    <SolidColorBrush x:Key="CardManagement.DangerForegroundBrush" Color="#FCA5A5" />
+    <SolidColorBrush x:Key="CardManagement.DangerBorderBrush" Color="#7F1D1D" />
+    <SolidColorBrush x:Key="CardManagement.DangerHoverBrush" Color="#7F1D1D" />
+    <SolidColorBrush x:Key="CardManagement.DangerPressedBrush" Color="#991B1B" />
+
+    <SolidColorBrush x:Key="CardManagement.ArrowHoverBrush" Color="#14213A" />
+    <SolidColorBrush x:Key="CardManagement.ArrowPressedBrush" Color="#1E293B" />
+
+    <!-- Normaler Action Button -->
+    <Style x:Key="CardManagement.ActionButtonStyle" TargetType="Button">
+        <Setter Property="Foreground" Value="{StaticResource CardManagement.PrimaryTextBrush}" />
+        <Setter Property="Background" Value="{StaticResource CardManagement.ButtonBackgroundBrush}" />
+        <Setter Property="BorderBrush" Value="{StaticResource CardManagement.CardBorderBrush}" />
+        <Setter Property="BorderThickness" Value="1" />
+        <Setter Property="Padding" Value="14,7" />
+        <Setter Property="MinWidth" Value="90" />
+        <Setter Property="Cursor" Value="Hand" />
+        <Setter Property="FontSize" Value="13" />
+
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="Button">
+                    <Border x:Name="ButtonBorder"
+                            Background="{TemplateBinding Background}"
+                            BorderBrush="{TemplateBinding BorderBrush}"
+                            BorderThickness="{TemplateBinding BorderThickness}"
+                            CornerRadius="6"
+                            Padding="{TemplateBinding Padding}">
+
+                        <ContentPresenter HorizontalAlignment="Center"
+                                          VerticalAlignment="Center"
+                                          RecognizesAccessKey="True" />
+                    </Border>
+
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="IsMouseOver" Value="True">
+                            <Setter TargetName="ButtonBorder"
+                                    Property="Background"
+                                    Value="{StaticResource CardManagement.ButtonHoverBrush}" />
+                            <Setter TargetName="ButtonBorder"
+                                    Property="BorderBrush"
+                                    Value="{StaticResource CardManagement.AccentBrush}" />
+                        </Trigger>
+
+                        <Trigger Property="IsPressed" Value="True">
+                            <Setter TargetName="ButtonBorder"
+                                    Property="Background"
+                                    Value="{StaticResource CardManagement.ButtonPressedBrush}" />
+                        </Trigger>
+
+                        <Trigger Property="IsEnabled" Value="False">
+                            <Setter Property="Opacity" Value="0.45" />
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <!-- Primärer Button, z.B. Neue Karte -->
+    <Style x:Key="CardManagement.PrimaryActionButtonStyle"
+           TargetType="Button"
+           BasedOn="{StaticResource CardManagement.ActionButtonStyle}">
+
+        <Setter Property="Background" Value="{StaticResource CardManagement.AccentBrush}" />
+        <Setter Property="Foreground" Value="#020617" />
+        <Setter Property="BorderBrush" Value="{StaticResource CardManagement.AccentBrush}" />
+
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="Button">
+                    <Border x:Name="ButtonBorder"
+                            Background="{TemplateBinding Background}"
+                            BorderBrush="{TemplateBinding BorderBrush}"
+                            BorderThickness="{TemplateBinding BorderThickness}"
+                            CornerRadius="6"
+                            Padding="{TemplateBinding Padding}">
+
+                        <ContentPresenter HorizontalAlignment="Center"
+                                          VerticalAlignment="Center"
+                                          RecognizesAccessKey="True" />
+                    </Border>
+
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="IsMouseOver" Value="True">
+                            <Setter TargetName="ButtonBorder"
+                                    Property="Background"
+                                    Value="{StaticResource CardManagement.AccentHoverBrush}" />
+                            <Setter TargetName="ButtonBorder"
+                                    Property="BorderBrush"
+                                    Value="{StaticResource CardManagement.AccentHoverBrush}" />
+                        </Trigger>
+
+                        <Trigger Property="IsPressed" Value="True">
+                            <Setter TargetName="ButtonBorder"
+                                    Property="Background"
+                                    Value="#0284C7" />
+                        </Trigger>
+
+                        <Trigger Property="IsEnabled" Value="False">
+                            <Setter Property="Opacity" Value="0.45" />
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <!-- Danger Button, z.B. Löschen -->
+    <Style x:Key="CardManagement.DangerActionButtonStyle"
+           TargetType="Button"
+           BasedOn="{StaticResource CardManagement.ActionButtonStyle}">
+
+        <Setter Property="Background" Value="{StaticResource CardManagement.DangerBackgroundBrush}" />
+        <Setter Property="Foreground" Value="{StaticResource CardManagement.DangerForegroundBrush}" />
+        <Setter Property="BorderBrush" Value="{StaticResource CardManagement.DangerBorderBrush}" />
+
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="Button">
+                    <Border x:Name="ButtonBorder"
+                            Background="{TemplateBinding Background}"
+                            BorderBrush="{TemplateBinding BorderBrush}"
+                            BorderThickness="{TemplateBinding BorderThickness}"
+                            CornerRadius="6"
+                            Padding="{TemplateBinding Padding}">
+
+                        <ContentPresenter HorizontalAlignment="Center"
+                                          VerticalAlignment="Center"
+                                          RecognizesAccessKey="True" />
+                    </Border>
+
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="IsMouseOver" Value="True">
+                            <Setter TargetName="ButtonBorder"
+                                    Property="Background"
+                                    Value="{StaticResource CardManagement.DangerHoverBrush}" />
+                            <Setter TargetName="ButtonBorder"
+                                    Property="BorderBrush"
+                                    Value="{StaticResource CardManagement.DangerHoverBrush}" />
+                            <Setter Property="Foreground" Value="{StaticResource CardManagement.PrimaryTextBrush}" />
+                        </Trigger>
+
+                        <Trigger Property="IsPressed" Value="True">
+                            <Setter TargetName="ButtonBorder"
+                                    Property="Background"
+                                    Value="{StaticResource CardManagement.DangerPressedBrush}" />
+                        </Trigger>
+
+                        <Trigger Property="IsEnabled" Value="False">
+                            <Setter Property="Opacity" Value="0.45" />
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <!-- Pfeilnavigation links/rechts -->
+    <Style x:Key="CardManagement.ArrowNavigationButtonStyle" TargetType="Button">
+        <Setter Property="Background" Value="Transparent" />
+        <Setter Property="BorderThickness" Value="0" />
+        <Setter Property="Foreground" Value="{StaticResource CardManagement.MutedTextBrush}" />
+        <Setter Property="Cursor" Value="Hand" />
+
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="Button">
+                    <Border x:Name="ArrowBorder"
+                            Background="Transparent"
+                            CornerRadius="10">
+
+                        <ContentPresenter HorizontalAlignment="Center"
+                                          VerticalAlignment="Center"
+                                          RecognizesAccessKey="True" />
+                    </Border>
+
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="IsMouseOver" Value="True">
+                            <Setter TargetName="ArrowBorder"
+                                    Property="Background"
+                                    Value="{StaticResource CardManagement.ArrowHoverBrush}" />
+                            <Setter Property="Foreground"
+                                    Value="{StaticResource CardManagement.AccentBrush}" />
+                        </Trigger>
+
+                        <Trigger Property="IsPressed" Value="True">
+                            <Setter TargetName="ArrowBorder"
+                                    Property="Background"
+                                    Value="{StaticResource CardManagement.ArrowPressedBrush}" />
+                        </Trigger>
+
+                        <Trigger Property="IsEnabled" Value="False">
+                            <Setter Property="Opacity" Value="0.25" />
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <!-- Text Styles -->
+    <Style x:Key="CardManagement.DeckTitleTextStyle" TargetType="TextBlock">
+        <Setter Property="Foreground" Value="{StaticResource CardManagement.PrimaryTextBrush}" />
+        <Setter Property="FontSize" Value="26" />
+        <Setter Property="FontWeight" Value="SemiBold" />
+        <Setter Property="VerticalAlignment" Value="Center" />
+    </Style>
+
+    <Style x:Key="CardManagement.PositionTextStyle" TargetType="TextBlock">
+        <Setter Property="Foreground" Value="{StaticResource CardManagement.SecondaryTextBrush}" />
+        <Setter Property="FontSize" Value="13" />
+        <Setter Property="VerticalAlignment" Value="Center" />
+    </Style>
+
+    <Style x:Key="CardManagement.CardLabelTextStyle" TargetType="TextBlock">
+        <Setter Property="Foreground" Value="{StaticResource CardManagement.SecondaryTextBrush}" />
+        <Setter Property="FontSize" Value="14" />
+        <Setter Property="Margin" Value="0,0,0,12" />
+    </Style>
+
+    <Style x:Key="CardManagement.QuestionTextStyle" TargetType="TextBlock">
+        <Setter Property="Foreground" Value="{StaticResource CardManagement.PrimaryTextBrush}" />
+        <Setter Property="FontSize" Value="30" />
+        <Setter Property="FontWeight" Value="SemiBold" />
+        <Setter Property="TextWrapping" Value="Wrap" />
+        <Setter Property="TextAlignment" Value="Center" />
+    </Style>
+
+    <Style x:Key="CardManagement.AnswerTextStyle" TargetType="TextBlock">
+        <Setter Property="Foreground" Value="{StaticResource CardManagement.PrimaryTextBrush}" />
+        <Setter Property="FontSize" Value="26" />
+        <Setter Property="TextWrapping" Value="Wrap" />
+        <Setter Property="TextAlignment" Value="Center" />
+    </Style>
+
+
+
+
+
+    <!-- CreateOrEditCardViewStyles-->
+    <Style x:Key="CardEditor.ContainerStyle" TargetType="Border">
+        <Setter Property="Background" Value="{StaticResource CardManagement.CardBackgroundBrush}" />
+        <Setter Property="BorderBrush" Value="{StaticResource CardManagement.CardBorderBrush}" />
+        <Setter Property="BorderThickness" Value="1" />
+        <Setter Property="CornerRadius" Value="12" />
+        <Setter Property="Padding" Value="24" />
+    </Style>
+
+    <Style x:Key="CardEditor.TitleTextStyle" TargetType="TextBlock">
+        <Setter Property="Foreground" Value="{StaticResource CardManagement.PrimaryTextBrush}" />
+        <Setter Property="FontSize" Value="20" />
+        <Setter Property="FontWeight" Value="SemiBold" />
+        <Setter Property="Margin" Value="0,0,0,18" />
+    </Style>
+
+    <Style x:Key="CardEditor.LabelTextStyle" TargetType="TextBlock">
+        <Setter Property="Foreground" Value="{StaticResource CardManagement.SecondaryTextBrush}" />
+        <Setter Property="FontSize" Value="14" />
+        <Setter Property="Margin" Value="0,0,0,6" />
+    </Style>
+
+    <Style x:Key="CardEditor.TextBoxStyle" TargetType="TextBox">
+        <Setter Property="Foreground" Value="{StaticResource CardManagement.PrimaryTextBrush}" />
+        <Setter Property="Background" Value="#0F172A" />
+        <Setter Property="BorderBrush" Value="{StaticResource CardManagement.CardBorderBrush}" />
+        <Setter Property="BorderThickness" Value="1" />
+        <Setter Property="Padding" Value="10" />
+        <Setter Property="FontSize" Value="15" />
+        <Setter Property="TextWrapping" Value="Wrap" />
+        <Setter Property="AcceptsReturn" Value="True" />
+        <Setter Property="VerticalScrollBarVisibility" Value="Auto" />
+    </Style>
+</ResourceDictionary>

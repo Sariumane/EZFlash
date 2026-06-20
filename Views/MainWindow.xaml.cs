@@ -29,8 +29,6 @@ public partial class MainWindow : Window
     {
         InitializeComponent();
 
-        DataContext = new MainViewModel();
-
         //Set the caption and text colors when the window is initialized
         SourceInitialized += (_, _) =>
         {

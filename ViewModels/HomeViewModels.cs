@@ -6,14 +6,28 @@ namespace EZFlash.ViewModels
 {
     public class HomeViewModel : ViewModelBase
     {
-        public ObservableCollection<Deck> Library { get; } = new();
+        private Deck? _selectedDeck;
 
-        public HomeViewModel()
+        public ObservableCollection<Deck> Library { get; init; }
+
+        public HomeViewModel(ObservableCollection<Deck> library)
         {
-            Library.Add(new Deck("Deck1"));
-            Library.Add(new Deck("Deck2"));
-            Library.Add(new Deck("Deck3"));
-            Library.Add(new Deck("Deck4"));
+            Library = library;
+        }
+
+        public Deck? SelectedDeck { 
+            get {
+                if (_selectedDeck != null)
+                    return _selectedDeck;
+                else
+                    return null;
+            }
+            set
+            {
+                _selectedDeck = value;
+                OnPropertyChanged();
+            }
+                
         }
     }
 }

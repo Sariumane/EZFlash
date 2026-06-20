@@ -1,7 +1,6 @@
 <Application x:Class="EZFlash.App"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-             StartupUri="Views/MainWindow.xaml">
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
     
     <Application.Resources>
         <ResourceDictionary>
@@ -10,6 +9,7 @@
                 <ResourceDictionary Source="Resources/Layouts.xaml"/>
                 <ResourceDictionary Source="Resources/ButtonStyles.xaml"/>
                 <ResourceDictionary Source="Resources/DeckListStyle.xaml"/>
+                <ResourceDictionary Source="Resources/CardManagementStyle.xaml"/>
             </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>
     </Application.Resources>
