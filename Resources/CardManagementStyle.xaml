@@ -27,7 +27,7 @@
     <SolidColorBrush x:Key="CardManagement.ArrowPressedBrush" Color="#1E293B" />
 
     <!-- Normaler Action Button -->
-    <Style x:Key="CardManagement.ActionButtonStyle" TargetType="Button">
+    <Style x:Key="CardManagement.EditButtonStyle" TargetType="Button">
         <Setter Property="Foreground" Value="{StaticResource CardManagement.PrimaryTextBrush}" />
         <Setter Property="Background" Value="{StaticResource CardManagement.ButtonBackgroundBrush}" />
         <Setter Property="BorderBrush" Value="{StaticResource CardManagement.CardBorderBrush}" />
@@ -78,9 +78,9 @@
     </Style>
 
     <!-- Primärer Button, z.B. Neue Karte -->
-    <Style x:Key="CardManagement.PrimaryActionButtonStyle"
+    <Style x:Key="CardManagement.NewButtonStyle"
            TargetType="Button"
-           BasedOn="{StaticResource CardManagement.ActionButtonStyle}">
+           BasedOn="{StaticResource CardManagement.EditButtonStyle}">
 
         <Setter Property="Background" Value="{StaticResource CardManagement.AccentBrush}" />
         <Setter Property="Foreground" Value="#020617" />
@@ -127,9 +127,9 @@
     </Style>
 
     <!-- Danger Button, z.B. Löschen -->
-    <Style x:Key="CardManagement.DangerActionButtonStyle"
+    <Style x:Key="CardManagement.DeleteButtonStyle"
            TargetType="Button"
-           BasedOn="{StaticResource CardManagement.ActionButtonStyle}">
+           BasedOn="{StaticResource CardManagement.EditButtonStyle}">
 
         <Setter Property="Background" Value="{StaticResource CardManagement.DangerBackgroundBrush}" />
         <Setter Property="Foreground" Value="{StaticResource CardManagement.DangerForegroundBrush}" />

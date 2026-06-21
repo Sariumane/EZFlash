@@ -14,6 +14,8 @@ public class MainViewModel : ViewModelBase
     private LearnScheduledViewModel _learnScheduledViewModel;
     private CardManagementViewModel _cardManagementViewModel;
     private DeckStore _deckStore;
+    private string _newDeckName;
+    private string _newDeckHint = "Type in a Name";
 
     public ViewModelBase CurrentViewModel
     {
@@ -25,9 +27,20 @@ public class MainViewModel : ViewModelBase
         }
     }
 
+    public string NewDeckName {
+        get => _newDeckName;
+        set
+        {
+            _newDeckName = value;
+            OnPropertyChanged(nameof(CanCreateDeck));
+        }  
+    }
+    public bool CanCreateDeck => NewDeckName != _newDeckHint;
+
     public ICommand ShowHomeViewCommand { get; }
     public ICommand ShowLearnScheduledViewCommand { get; }
     public ICommand ShowCardManagementViewCommand { get; }
+    public ICommand SaveNewDeckCommand { get; }
 
     public MainViewModel(DeckStore deckStore)
     {
@@ -36,11 +49,13 @@ public class MainViewModel : ViewModelBase
         _learnScheduledViewModel = new ();
         _cardManagementViewModel = new();
 
+        NewDeckName = _newDeckHint;
         CurrentViewModel = _homeViewModel;
 
         ShowHomeViewCommand = new RelayCommand(ShowHomeView);
         ShowLearnScheduledViewCommand = new RelayCommand(ShowLearnScheduledView);
         ShowCardManagementViewCommand = new RelayCommand(ShowCardManagementView);
+        SaveNewDeckCommand = new RelayCommand(SaveNewDeck);
     }
 
 
@@ -61,8 +76,15 @@ public class MainViewModel : ViewModelBase
         var currentDeck = _homeViewModel.SelectedDeck;
         if(currentDeck != null)
         {
-            _cardManagementViewModel.CurrentDeck = _homeViewModel.SelectedDeck;
+            _cardManagementViewModel.CurrentDeck = currentDeck;
             CurrentViewModel = _cardManagementViewModel;
         }
+    }
+
+    private void SaveNewDeck()
+    {
+        _deckStore.Inventory.AddDeck(NewDeckName);
+        NewDeckName = _newDeckHint;
+        OnPropertyChanged(nameof(NewDeckName));
     }
 }

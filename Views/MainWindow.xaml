@@ -39,6 +39,7 @@
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="200"/>
             <ColumnDefinition Width="1"/>
+            <ColumnDefinition Width="250"/>
             <ColumnDefinition Width="*"/>
         </Grid.ColumnDefinitions>
 
@@ -82,12 +83,46 @@
 
         <!-- Separator -->
         <Grid Grid.Column="1" Background="{StaticResource DividerBrush}"/>
+        
+        <!-- New Deck -->
+        <Grid Grid.Column="2" 
+              Background="{StaticResource MainBackgroundBrush}">
+            <Border Padding="30" Margin="0,20,0,0">
+                <StackPanel>
+                    <Label Content="New Deck"
+                           HorizontalAlignment="Left"
+                           Foreground="{StaticResource PrimaryTextBrush}" 
+                           FontSize="32" 
+                           FontWeight="SemiBold"
+                           Padding="0"
+                           Margin="0,0,0,10"/>
+                    <Border Padding="5"
+                            Margin="0,0,0,10"
+                            CornerRadius="6"
+                            Background="#243044"
+                            BorderBrush="#3B4A63"
+                            BorderThickness="1">
+                        <TextBox Padding="0"
+                                 Margin="0"
+                                 Background="Transparent"
+                                 BorderThickness="0"
+                                 Foreground="#F8FAFC"
+                                 CaretBrush="#38BDF8"
+                                 Text="{Binding NewDeckName, UpdateSourceTrigger=PropertyChanged}"/>
+                    </Border>
+                    <Button Content="Save" 
+                            Style="{StaticResource CardManagement.NewButtonStyle}"
+                            Command="{Binding SaveNewDeckCommand}"
+                            IsEnabled="{Binding CanCreateDeck}"/>
+                </StackPanel>
+            </Border>
+        </Grid>
 
-        <!-- Main Content -->
-        <Grid Grid.Column="2" Background="{StaticResource MainBackgroundBrush}">
+            <!-- Main Content -->
+        <Grid Grid.Column="3" Background="{StaticResource MainBackgroundBrush}">
             <ContentControl 
                 x:Name="MainContent"
-                Grid.Column="2"
+                Grid.Column="3"
                 Background="{StaticResource MainBackgroundBrush}"
                 Content="{Binding CurrentViewModel}"/>
         </Grid>

@@ -29,7 +29,7 @@
                          SelectedItem="{Binding SelectedDeck}"
                          BorderThickness="0"
                          Background="Transparent" 
-                         Width="700"
+                         Width="500"
                          ItemContainerStyle="{StaticResource DeckListStyle}">
 
                     <ListBox.ItemTemplate>
