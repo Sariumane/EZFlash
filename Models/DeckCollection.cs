@@ -8,13 +8,18 @@ namespace EZFlash.Models
         public ObservableCollection<Deck> Decks { get; set; } = new();
         public Deck? SelectedDeck { get; set; }
 
-        public void AddDeck(string title) => Decks.Add(new(title));
+        public Deck AddDeck(string title)
+        {
+            Deck deck = new(title);
+            Decks.Add(new(title));
+            return deck;
+        }
         public void AddDeck(Deck deck) => Decks.Add(deck);
 
-        public void RemoveSelectedDeck(Deck deck)
+        public void RemoveDeck(Deck deck)
         {
-            if (SelectedDeck != null)
-                Decks.Remove(SelectedDeck);
+            if (deck != null)
+                Decks.Remove(deck);
         }
     }
 }

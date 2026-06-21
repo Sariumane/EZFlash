@@ -4,43 +4,96 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
 
     <Grid Background="{StaticResource MainBackgroundBrush}">
-        <Grid.ContextMenu>
-            <ContextMenu>
-                <MenuItem Header="New Deck"/>
-            </ContextMenu>
-        </Grid.ContextMenu>
         <Border Background="{StaticResource MainBackgroundBrush}"
                 BorderBrush="Transparent"
                 BorderThickness="0"
                 Padding="30"
                 MinWidth="500"
-                MaxWidth="1200"
-                HorizontalAlignment="Center">
+                MaxWidth="1200">
 
-            <StackPanel>
-                <TextBlock Text="Willkommen bei EZFlash"
-                           Foreground="{StaticResource PrimaryTextBrush}"
-                           FontSize="32"
-                           FontWeight="SemiBold"
-                           HorizontalAlignment="Center"
-                           Margin="20"/>
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="250"/>
+                    <ColumnDefinition Width="20"/>
+                    <ColumnDefinition Width="600*"/>
+                </Grid.ColumnDefinitions>
 
-                <ListBox ItemsSource="{Binding Library}"
-                         SelectedItem="{Binding SelectedDeck}"
-                         BorderThickness="0"
-                         Background="Transparent" 
-                         Width="500"
-                         ItemContainerStyle="{StaticResource DeckListStyle}">
 
-                    <ListBox.ItemTemplate>
-                        <DataTemplate>
-                            <TextBlock Text="{Binding Name}"
+                <Grid Grid.Column="0">
+                    <Border Padding="0" Margin="0,20,50,0">
+                        <StackPanel>
+                            <Label Content="New Deck"
+                                   HorizontalAlignment="Left"
+                                   Foreground="{StaticResource PrimaryTextBrush}" 
+                                   FontSize="32" 
+                                   FontWeight="SemiBold"
+                                   Padding="0"
+                                   Margin="0,0,0,10"/>
+
+                            <Border Padding="5"
+                                    Margin="0,0,0,10"
+                                    CornerRadius="6"
+                                    Background="#243044"
+                                    BorderBrush="#3B4A63"
+                                    BorderThickness="1">
+                                <TextBox Padding="0"
+                                         Margin="0"
+                                         Background="Transparent"
+                                         BorderThickness="0"
+                                         Foreground="#F8FAFC"
+                                         CaretBrush="#38BDF8"
+                                         Text="{Binding NewDeckName, UpdateSourceTrigger=PropertyChanged}">
+                                    <TextBox.InputBindings>
+                                        <KeyBinding Key="Enter"
+                                                    Command="{Binding SaveNewDeckCommand}"/>
+                                    </TextBox.InputBindings>
+                                </TextBox>
+                            </Border>
+                            <Button Content="Save" 
+                                    Style="{StaticResource CardManagement.NewButtonStyle}"
+                                    Command="{Binding SaveNewDeckCommand}"
+                                    IsEnabled="{Binding CanCreateDeck}"/>
+                        </StackPanel>
+                    </Border>
+                </Grid>
+
+                <Grid Grid.Column="1" Background="{StaticResource MainBackgroundBrush}" HorizontalAlignment="Stretch"/>
+
+                <Grid Grid.Column="2">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="*"/>
+                    </Grid.RowDefinitions>
+
+                    <TextBlock Grid.Row="0"
+                               Text="Willkommen bei EZFlash"
+                               Foreground="{StaticResource PrimaryTextBrush}"
+                               FontSize="32"
+                               FontWeight="SemiBold"
+                               HorizontalAlignment="Center"
+                               Margin="20"/>
+
+                    <ListBox Grid.Row="1"
+                             ItemsSource="{Binding Library}"
+                             SelectedItem="{Binding SelectedDeck}"
+                             BorderThickness="0"
+                             Background="Transparent"
+                             Width="500"
+                             Margin="0,20,0,0"
+                             ScrollViewer.VerticalScrollBarVisibility="Hidden"
+                             ScrollViewer.HorizontalScrollBarVisibility="Disabled"
+                             ItemContainerStyle="{StaticResource DeckListStyle}">
+
+                        <ListBox.ItemTemplate>
+                            <DataTemplate>
+                                <TextBlock Text="{Binding Name}"
                                            Foreground="{StaticResource PrimaryTextBrush}"
                                            FontSize="16"/>
-                        </DataTemplate>
-                    </ListBox.ItemTemplate>
-                </ListBox>
-            </StackPanel>
+                            </DataTemplate>
+                        </ListBox.ItemTemplate>
+                    </ListBox>
+                </Grid>
+            </Grid>
         </Border>
     </Grid>
 </UserControl>

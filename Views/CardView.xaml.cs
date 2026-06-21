@@ -16,23 +16,13 @@ using System.Windows.Shapes;
 namespace EZFlash.Views
 {
     /// <summary>
-    /// Interaktionslogik für CardManagement.xaml
+    /// Interaction logic for CardView.xaml
     /// </summary>
-    public partial class CardManagementView : UserControl
+    public partial class CardView : UserControl
     {
-        public CardManagementView()
+        public CardView()
         {
             InitializeComponent();
-        }
-
-        private void UserControl_Loaded(object sender, RoutedEventArgs e)
-        {
-            //Dispatcher = Warteschlange des UI Threads
-            Dispatcher.BeginInvoke(new Action(() =>
-            {
-                Focus();
-                Keyboard.Focus(this);
-            }));
         }
     }
 }

@@ -7,11 +7,16 @@
              
              xmlns:vm="clr-namespace:EZFlash.ViewModels"
              xmlns:views="clr-namespace:EZFlash.Views"
-             Focusable="True">
+             Focusable="True"
+             Loaded="UserControl_Loaded">
 
     <UserControl.Resources>
         <DataTemplate DataType="{x:Type vm:CreateOrEditCardViewModel}">
             <views:CreateOrEditCardView />
+        </DataTemplate>
+        
+        <DataTemplate DataType="{x:Type vm:CardViewModel}">
+            <views:CardView/>
         </DataTemplate>
     </UserControl.Resources>
 
@@ -21,6 +26,9 @@
 
         <KeyBinding Key="Right"
                     Command="{Binding NextCardCommand}" />
+
+        <KeyBinding Key="Esc"
+                    Command="{Binding AbortCommand}"/>
     </UserControl.InputBindings>
 
     <Grid Background="{StaticResource CardManagement.PageBackgroundBrush}"
@@ -86,51 +94,6 @@
                        FontWeight="Light" />
         </Button>
 
-        <!-- Karte -->
-        <Border Grid.Row="1"
-                Grid.Column="1"
-                Padding="34"
-                CornerRadius="14"
-                Background="{StaticResource CardManagement.CardBackgroundBrush}"
-                BorderBrush="{StaticResource CardManagement.CardBorderBrush}"
-                BorderThickness="1">
-
-            <Grid>
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="*" />
-                    <RowDefinition Height="Auto" />
-                    <RowDefinition Height="*" />
-                </Grid.RowDefinitions>
-
-                <StackPanel Grid.Row="0"
-                            VerticalAlignment="Center">
-
-                    <TextBlock Text="Frage"
-                               Style="{StaticResource CardManagement.CardLabelTextStyle}" />
-
-                    <TextBlock Text="{Binding CurrentCard.Question}"
-                               d:Text="Dummy Frage"
-                               Style="{StaticResource CardManagement.QuestionTextStyle}" />
-                </StackPanel>
-
-                <Border Grid.Row="1"
-                        Height="1"
-                        Background="{StaticResource CardManagement.CardBorderBrush}"
-                        Margin="0,30" />
-
-                <StackPanel Grid.Row="2"
-                            VerticalAlignment="Center">
-
-                    <TextBlock Text="Antwort"
-                               Style="{StaticResource CardManagement.CardLabelTextStyle}" />
-
-                    <TextBlock Text="{Binding CurrentCard.Answer}"
-                               d:Text="Dummy Antwort"
-                               Style="{StaticResource CardManagement.AnswerTextStyle}" />
-                </StackPanel>
-            </Grid>
-        </Border>
-
         <!-- Rechts -->
         <Button Grid.Row="1"
                 Grid.Column="2"
@@ -143,9 +106,8 @@
                        FontWeight="Light" />    
         </Button>
 
-        <ContentControl Grid.Row="2"
-                        Grid.Column="0"
-                        Grid.ColumnSpan="3"
+        <ContentControl Grid.Row="1"
+                        Grid.Column="1"
                         Content="{Binding CurrentEditorViewModel}"
                         Margin="0,24,0,0" /> 
     </Grid>

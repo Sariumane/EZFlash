@@ -10,29 +10,28 @@ using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
 using System.Windows.Shapes;
+using System.Windows.Threading;
 
 namespace EZFlash.Views
 {
     /// <summary>
-    /// Interaktionslogik für CardManagement.xaml
+    /// Interaction logic for RenameDeckDialog.xaml
     /// </summary>
-    public partial class CardManagementView : UserControl
+    public partial class RenameDeckDialog : Window
     {
-        public CardManagementView()
+        public RenameDeckDialog()
         {
             InitializeComponent();
         }
 
-        private void UserControl_Loaded(object sender, RoutedEventArgs e)
+        private void DeckNameTextBox_Loaded(object sender, RoutedEventArgs e)
         {
-            //Dispatcher = Warteschlange des UI Threads
             Dispatcher.BeginInvoke(new Action(() =>
             {
-                Focus();
-                Keyboard.Focus(this);
-            }));
+                DeckNameTextBox.Focus();
+                DeckNameTextBox.CaretIndex = DeckNameTextBox.Text.Length;
+            }), DispatcherPriority.Input);
         }
     }
 }

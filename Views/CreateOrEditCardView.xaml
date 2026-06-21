@@ -49,13 +49,14 @@
 
                 <Button Content="Abbrechen"
                         Command="{Binding CancelCommand}"
-                        Style="{StaticResource CardManagement.ActionButtonStyle}"
+                        Style="{StaticResource CardManagement.EditButtonStyle}"
                         Margin="0,0,8,0" />
 
-                <Button Content="{Binding SaveButtonText}"
+                <Button Content="Save"
                         d:Content="Save"
                         Command="{Binding SaveCommand}"
-                        Style="{StaticResource CardManagement.PrimaryActionButtonStyle}" />
+                        Style="{StaticResource CardManagement.NewButtonStyle}" />
+
             </StackPanel>
         </Grid>
     </Border>

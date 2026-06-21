@@ -14,8 +14,7 @@ public class MainViewModel : ViewModelBase
     private LearnScheduledViewModel _learnScheduledViewModel;
     private CardManagementViewModel _cardManagementViewModel;
     private DeckStore _deckStore;
-    private string _newDeckName;
-    private string _newDeckHint = "Type in a Name";
+    
 
     public ViewModelBase CurrentViewModel
     {
@@ -27,40 +26,36 @@ public class MainViewModel : ViewModelBase
         }
     }
 
-    public string NewDeckName {
-        get => _newDeckName;
-        set
-        {
-            _newDeckName = value;
-            OnPropertyChanged(nameof(CanCreateDeck));
-        }  
-    }
-    public bool CanCreateDeck => NewDeckName != _newDeckHint;
-
     public ICommand ShowHomeViewCommand { get; }
     public ICommand ShowLearnScheduledViewCommand { get; }
+    public ICommand ShowLearnFreeViewCommand { get; }
     public ICommand ShowCardManagementViewCommand { get; }
-    public ICommand SaveNewDeckCommand { get; }
 
     public MainViewModel(DeckStore deckStore)
     {
         _deckStore = deckStore;
-        _homeViewModel = new (_deckStore.Inventory.Decks);
+        _homeViewModel = new (_deckStore.Inventory.Decks, 
+            ShowLearnScheduledView, ShowLearnFreeView, ShowCardManagementView, 
+            DeleteDeck, SaveNewDeck, SaveExistingDeck);
         _learnScheduledViewModel = new ();
-        _cardManagementViewModel = new();
+        _cardManagementViewModel = new(SaveExistingDeck, ShowHomeView);
 
-        NewDeckName = _newDeckHint;
+        
         CurrentViewModel = _homeViewModel;
 
         ShowHomeViewCommand = new RelayCommand(ShowHomeView);
         ShowLearnScheduledViewCommand = new RelayCommand(ShowLearnScheduledView);
         ShowCardManagementViewCommand = new RelayCommand(ShowCardManagementView);
-        SaveNewDeckCommand = new RelayCommand(SaveNewDeck);
     }
 
 
-    //Dirty Functions
     private void ShowLearnScheduledView()
+    {
+        CurrentViewModel = _learnScheduledViewModel;
+
+    }
+
+    private void ShowLearnFreeView()
     {
         CurrentViewModel = _learnScheduledViewModel;
 
@@ -73,18 +68,28 @@ public class MainViewModel : ViewModelBase
 
     private void ShowCardManagementView()
     {
-        var currentDeck = _homeViewModel.SelectedDeck;
+        Deck? currentDeck = _homeViewModel.SelectedDeck;
         if(currentDeck != null)
         {
             _cardManagementViewModel.CurrentDeck = currentDeck;
+            _cardManagementViewModel.InitCardView();
             CurrentViewModel = _cardManagementViewModel;
         }
     }
 
-    private void SaveNewDeck()
+    private void SaveNewDeck(string newDeckName)
     {
-        _deckStore.Inventory.AddDeck(NewDeckName);
-        NewDeckName = _newDeckHint;
-        OnPropertyChanged(nameof(NewDeckName));
+        Deck deck = _deckStore.Inventory.AddDeck(newDeckName);
+        _deckStore.SaveDeckToDisk(deck);
+    }
+
+    private void SaveExistingDeck(Deck deck) => _deckStore.SaveDeckToDisk(deck);
+
+    private void DeleteDeck()
+    {
+        if (_homeViewModel.SelectedDeck == null)
+            return;
+        _deckStore.DeleteDeckFromDisk(_homeViewModel.SelectedDeck);
+        _homeViewModel.SelectedDeck = null;
     }
 }

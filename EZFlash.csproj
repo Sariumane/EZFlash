@@ -10,17 +10,34 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <None Remove="Assets\EZFlash_icon.ico" />
-    <None Remove="Assets\EZFlash_icon.png" />
+    <Compile Remove="TestData\**" />
+    <EmbeddedResource Remove="TestData\**" />
+    <None Remove="TestData\**" />
+    <Page Remove="TestData\**" />
   </ItemGroup>
 
   <ItemGroup>
+    <None Remove="Assets\delete.png" />
+    <None Remove="Assets\edit.png" />
+    <None Remove="Assets\EZFlash_icon.ico" />
+    <None Remove="Assets\EZFlash_icon.png" />
+    <None Remove="Assets\learn-free.png" />
+    <None Remove="Assets\learn-scheduled.png" />
+    <None Remove="Assets\rename.png" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Resource Include="Assets\delete.png" />
+    <Resource Include="Assets\edit.png" />
     <Resource Include="Assets\EZFlash_icon.ico">
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
     </Resource>
     <Resource Include="Assets\EZFlash_icon.png">
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
     </Resource>
+    <Resource Include="Assets\learn-free.png" />
+    <Resource Include="Assets\learn-scheduled.png" />
+    <Resource Include="Assets\rename.png" />
   </ItemGroup>
 
   <ItemGroup>

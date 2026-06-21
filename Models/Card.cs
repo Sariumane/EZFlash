@@ -6,9 +6,9 @@ namespace EZFlash.Models
     {
         public Guid Id { get; init; } = Guid.NewGuid();
         public DateTime CreatedAt { get; init; } = DateTime.UtcNow;
-      
-        public string? Front { get; set; }
-        public string? Back { get; set; }
+
+        public string Front { get; set; }
+        public string Back { get; set; }
 
         public DateTime? ReviewedAt { get; private set; }
         public DateTime? NextReviewDate { get; private set; }
@@ -18,7 +18,9 @@ namespace EZFlash.Models
 
         public CardRating LastRating { get; private set; }
 
-        public Card(string front, string back)
+
+
+        public Card(string front = "", string back = "")
         {
             this.Front = front;
             this.Back = back;

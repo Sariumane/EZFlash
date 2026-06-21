@@ -12,18 +12,70 @@
             <Setter.Value>
                 <ControlTemplate TargetType="ListBoxItem">
                     <Border x:Name="ItemBorder"
-                        Background="{StaticResource DeckCoverColor}"
-                        CornerRadius="8"
-                        Padding="16"
-                        SnapsToDevicePixels="True">
+                            Background="{StaticResource DeckCoverColor}"
+                            Padding="16"
+                            SnapsToDevicePixels="True"
+                            CornerRadius="6"
+                            Tag="{Binding DataContext, RelativeSource={RelativeSource AncestorType=ListBox}}">
 						<Border.ContextMenu>
-							<ContextMenu>
-								<MenuItem Header="Learn Scheduled" />
-                                <MenuItem Header="Learn Free" />
-								<MenuItem Header="Edit" />
-								<MenuItem Header="Delete" />
-							</ContextMenu>
-						</Border.ContextMenu>
+                            <ContextMenu DataContext="{Binding PlacementTarget.Tag,
+                                          RelativeSource={RelativeSource Self}}">
+                                <MenuItem Header="Learn Scheduled"
+                                          Command="{Binding LearnScheduledCommand}">
+                                    <MenuItem.Icon>
+                                        <Image Source="/Assets/learn-scheduled.png"
+                                               Width="14"
+                                               Height="14"
+                                               Stretch="Uniform"/>
+                                    </MenuItem.Icon>
+                                </MenuItem>
+
+                                <MenuItem Header="Learn Free"
+                                          Command="{Binding LearnFreeCommand}" >
+                                    <MenuItem.Icon>
+                                        <Image Source="/Assets/learn-free.png"
+                                               Width="14"
+                                               Height="14"
+                                               Stretch="Uniform"/>
+                                    </MenuItem.Icon>
+                                </MenuItem>
+
+                                <Separator/>
+
+                                <MenuItem Header="Rename"
+                                          Command="{Binding RenameDeckCommand}" >
+                                    <MenuItem.Icon>
+                                        <Image Source="/Assets/rename.png"
+                                               Width="14"
+                                               Height="14"
+                                               Stretch="Uniform"/>
+                                    </MenuItem.Icon>
+                                </MenuItem>
+
+                                <MenuItem Header="Edit"
+                                          Command="{Binding EditDeckCommand}" >
+                                    <MenuItem.Icon>
+                                        <Image Source="/Assets/edit.png"
+                                               Width="14"
+                                               Height="14"
+                                               Stretch="Uniform"/>
+                                    </MenuItem.Icon>
+                                </MenuItem>
+
+
+                                <MenuItem Header="Delete" 
+                                          Command="{Binding DeleteDeckCommand}"
+                                          Style="{StaticResource DangerContextMenuItemStyle}" >
+                                    <MenuItem.Icon>
+                                        <Image Source="/Assets/delete.png"
+                                               Width="14"
+                                               Height="14"
+                                               Stretch="Uniform"/>
+                                    </MenuItem.Icon>
+                                </MenuItem>
+
+                            </ContextMenu>
+                        </Border.ContextMenu>
 
                         <ContentPresenter />
                     </Border>
