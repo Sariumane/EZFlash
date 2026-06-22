@@ -44,11 +44,11 @@ namespace EZFlash.ViewModels
             get
             {
                 if (_isLoadedFromReviewLog)
-                    return "Review-Auswertung";
+                    return "Review Summary";
 
                 return Mode == LearningMode.Free
-                    ? "Free Learning abgeschlossen"
-                    : "Scheduled Learning abgeschlossen";
+                    ? "Free Learning Complete"
+                    : "Scheduled Learning Complete";
             }
         }
 
@@ -60,15 +60,15 @@ namespace EZFlash.ViewModels
                     return $"{_reviewDeckName} · {_reviewedAt.Value:dd.MM.yyyy HH:mm}";
 
                 return Mode == LearningMode.Free
-                    ? "Hier ist deine Auswertung für das gesamte Deck."
-                    : "Hier ist deine Auswertung für die fälligen Karten.";
+                    ? "Here is your summary for the entire deck."
+                    : "Here is your summary for the cards that were due.";
             }
         }
 
         public string BackOverviewText =>
             _isLoadedFromReviewLog
-                ? "Zurück zu Stats"
-                : "Zurück zur Übersicht";
+                ? "Back to Stats"
+                : "Back to Overview";
 
         public string ScoreText => $"{Score:0}%";
 

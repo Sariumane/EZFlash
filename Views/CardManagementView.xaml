@@ -140,21 +140,21 @@
                 </StackPanel>
 
                 <TextBlock Text="{Binding CardPositionText}"
-                           d:Text="Dummy Anzahl"
+                           d:Text="Sample Count"
                            Style="{StaticResource CardManagement.PositionTextStyle}"
                            Margin="0,0,18,0" />
 
-                <Button Content="Neue Karte"
+                <Button Content="New Card"
                         Command="{Binding CreateNewCardCommand}"
                         Style="{StaticResource CardManagement.NewButtonStyle}"
                         Margin="0,0,8,0" />
 
-                <Button Content="Bearbeiten"
+                <Button Content="Edit"
                         Command="{Binding EditCurrentCardCommand}"
                         Style="{StaticResource CardManagement.EditButtonStyle}"
                         Margin="0,0,8,0" />
 
-                <Button Content="Löschen"
+                <Button Content="Delete"
                         Command="{Binding DeleteCurrentCardCommand}"
                         Style="{StaticResource CardManagement.DeleteButtonStyle}" />
             </StackPanel>

@@ -89,8 +89,8 @@ namespace EZFlash.ViewModels
 
         public string Subtitle =>
             CurrentMode == LearningMode.Free
-                ? "Gehe das gesamte Deck einmal durch."
-                : "Lerne nur Karten, die zur Wiederholung fällig sind.";
+                ? "Review the entire deck once."
+                : "Study only cards that are due for review.";
 
         public string ProgressText
         {
@@ -108,8 +108,8 @@ namespace EZFlash.ViewModels
 
         public string EmptyStateText =>
             CurrentMode == LearningMode.Scheduled
-                ? "Keine Karten sind aktuell fällig."
-                : "Dieses Deck enthält keine Karten.";
+                ? "No cards are currently due."
+                : "This deck contains no cards.";
 
         public Visibility AnswerVisibility =>
             IsAnswerVisible ? Visibility.Visible : Visibility.Collapsed;

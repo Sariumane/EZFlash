@@ -14,7 +14,7 @@
                 VerticalAlignment="Center">
 
             <StackPanel VerticalAlignment="Center">
-                <TextBlock Text="Das ist die Spaced Repetition Seite"
+                <TextBlock Text="This is the spaced repetition page"
                            Foreground="{StaticResource PrimaryTextBrush}"
                            FontSize="32"
                            FontWeight="SemiBold"

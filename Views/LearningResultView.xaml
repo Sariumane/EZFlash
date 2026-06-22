@@ -159,12 +159,12 @@
             Margin="0,0,0,16"
             Visibility="{Binding ReviewNavigationVisibility}">
 
-                        <Button Content="← Ältere Review"
+                        <Button Content="← Older Review"
             Command="{Binding ShowOlderReviewCommand}"
             Style="{StaticResource ResultButtonStyle}"
             Margin="0,0,12,0"/>
 
-                        <Button Content="Neuere Review →"
+                        <Button Content="Newer Review →"
             Command="{Binding ShowNewerReviewCommand}"
             Style="{StaticResource ResultButtonStyle}"/>
 

@@ -22,11 +22,11 @@
             <StackPanel Grid.Row="1"
                         Margin="0,0,0,14">
 
-                <TextBlock Text="Frage"
+                <TextBlock Text="Question"
                            Style="{StaticResource CardEditor.LabelTextStyle}" />
 
                 <TextBox Text="{Binding Question, UpdateSourceTrigger=PropertyChanged}"
-                         d:Text="Das hier ist eine Frage."
+                         d:Text="This is a sample question."
                          Style="{StaticResource CardEditor.TextBoxStyle}"
                          MinHeight="90" />
             </StackPanel>
@@ -34,11 +34,11 @@
             <StackPanel Grid.Row="2"
                         Margin="0,0,0,18">
 
-                <TextBlock Text="Antwort"
+                <TextBlock Text="Answer"
                            Style="{StaticResource CardEditor.LabelTextStyle}" />
 
                 <TextBox Text="{Binding Answer, UpdateSourceTrigger=PropertyChanged}"
-                         d:Text="Das hier ist eine Antwort"
+                         d:Text="This is a sample answer."
                          Style="{StaticResource CardEditor.TextBoxStyle}"
                          MinHeight="90" />
             </StackPanel>
@@ -47,7 +47,7 @@
                         Orientation="Horizontal"
                         HorizontalAlignment="Right">
 
-                <Button Content="Abbrechen"
+                <Button Content="Cancel"
                         Command="{Binding CancelCommand}"
                         Style="{StaticResource CardManagement.EditButtonStyle}"
                         Margin="0,0,8,0" />

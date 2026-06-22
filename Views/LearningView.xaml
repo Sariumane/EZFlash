@@ -107,7 +107,7 @@
                                TextAlignment="Center"
                                TextWrapping="Wrap" />
 
-                    <TextBlock Text="Du kannst später wiederkommen oder ein anderes Deck auswählen."
+                    <TextBlock Text="You can come back later or select another deck."
                                Foreground="{StaticResource Learning.SecondaryTextBrush}"
                                FontSize="14"
                                Margin="0,12,0,0"
@@ -137,7 +137,7 @@
 
                     <!-- Question -->
                     <StackPanel Grid.Row="0">
-                        <TextBlock Text="Frage"
+                        <TextBlock Text="Question"
                                    Foreground="{StaticResource Learning.MutedTextBrush}"
                                    FontSize="13"
                                    FontWeight="SemiBold"
@@ -160,7 +160,7 @@
                                 Background="{StaticResource Learning.CardBorderBrush}"
                                 Margin="0,0,0,28" />
 
-                        <TextBlock Text="Antwort"
+                        <TextBlock Text="Answer"
                                    Foreground="{StaticResource Learning.MutedTextBrush}"
                                    FontSize="13"
                                    FontWeight="SemiBold"
@@ -179,7 +179,7 @@
                     <StackPanel Grid.Row="2"
                                 HorizontalAlignment="Center">
 
-                        <Button Content="Antwort anzeigen"
+                        <Button Content="Show Answer"
                                 Command="{Binding ShowAnswerCommand}"
                                 Visibility="{Binding ShowAnswerButtonVisibility}"
                                 Style="{StaticResource LearningPrimaryButtonStyle}" />

@@ -25,11 +25,11 @@
             <StackPanel Grid.Row="0"
                     VerticalAlignment="Center">
 
-                <TextBlock Text="Frage" Margin="0, 0, 0, 40"
+                <TextBlock Text="Question" Margin="0, 0, 0, 40"
                        Style="{StaticResource CardManagement.CardLabelTextStyle}" />
 
                 <TextBlock Text="{Binding Question}"
-                       d:Text="Dummy Frage"
+                       d:Text="Sample Question"
                        Style="{StaticResource CardManagement.QuestionTextStyle}" />
             </StackPanel>
 
@@ -41,11 +41,11 @@
             <StackPanel Grid.Row="2"
                     VerticalAlignment="Center">
 
-                <TextBlock Text="Antwort" Margin="0, 0, 0, 40"
+                <TextBlock Text="Answer" Margin="0, 0, 0, 40"
                        Style="{StaticResource CardManagement.CardLabelTextStyle}" />
 
                 <TextBlock Text="{Binding Answer}"
-                       d:Text="Dummy Antwort"
+                       d:Text="Sample Answer"
                        Style="{StaticResource CardManagement.AnswerTextStyle}" />
             </StackPanel>
         </Grid>

@@ -35,7 +35,7 @@
             </Grid.RowDefinitions>
 
             <TextBlock Grid.Row="0"
-                       Text="Deck umbenennen"
+                       Text="Rename Deck"
                        Foreground="{StaticResource CardManagement.PrimaryTextBrush}"
                        FontSize="20"
                        FontWeight="SemiBold" />

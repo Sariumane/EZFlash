@@ -66,7 +66,7 @@
                     </Grid.RowDefinitions>
 
                     <TextBlock Grid.Row="0"
-                               Text="Willkommen bei EZFlash"
+                               Text="Welcome to EZFlash"
                                Foreground="{StaticResource PrimaryTextBrush}"
                                FontSize="32"
                                FontWeight="SemiBold"
@@ -98,7 +98,7 @@
                                                    FontSize="16"
                                                    FontWeight="SemiBold"/>
 
-                                        <TextBlock Text="{Binding TotalCount, StringFormat={}{0} Karten}"
+                                        <TextBlock Text="{Binding TotalCount, StringFormat={}{0} Cards}"
                                                    Foreground="{StaticResource SecondaryTextBrush}"
                                                    FontSize="12"
                                                    Margin="0,4,0,0"/>
