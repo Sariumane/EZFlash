@@ -8,12 +8,15 @@ namespace EZFlash.ViewModels;
 public class MainViewModel : ViewModelBase
 {
     private ViewModelBase _currentViewModel;
-    private HomeViewModel _homeViewModel;
-    private CardManagementViewModel _cardManagementViewModel;
-    private LearningViewModel _learningViewModel;
-    private LearningResultViewModel _learningResultViewModel;
+    private readonly HomeViewModel _homeViewModel;
+    private readonly CardManagementViewModel _cardManagementViewModel;
+    private readonly LearningViewModel _learningViewModel;
+    private readonly LearningResultViewModel _learningResultViewModel;
+    private readonly SettingsViewModel _settingsViewModel;
+    private readonly ReviewLogViewModel _reviewLogViewModel;
 
     private DeckStore _deckStore;
+    private SettingsStore _settingsStore;
 
     public ViewModelBase CurrentViewModel
     {
@@ -29,10 +32,13 @@ public class MainViewModel : ViewModelBase
     public ICommand StartFreeLearningCommand { get; }
     public ICommand StartScheduledLearningCommand { get; }
     public ICommand ShowCardManagementViewCommand { get; }
+    public ICommand ShowSettingsViewCommand { get; }
+    public ICommand ShowReviewLogViewCommand { get; }
 
-    public MainViewModel(DeckStore deckStore)
+    public MainViewModel(DeckStore deckStore, SettingsStore settingsStore)
     {
         _deckStore = deckStore;
+        _settingsStore = settingsStore;
 
         _homeViewModel = new HomeViewModel(
             _deckStore.Inventory.Decks,
@@ -55,12 +61,18 @@ public class MainViewModel : ViewModelBase
 
         _learningViewModel.LearningFinished += OnLearningFinished;
 
+        _settingsViewModel = new SettingsViewModel(_settingsStore);
+
+        _reviewLogViewModel = new ReviewLogViewModel(_deckStore, ShowReviewResult);
+
         CurrentViewModel = _homeViewModel;
 
         ShowHomeViewCommand = new RelayCommand(ShowHomeView);
         StartFreeLearningCommand = new RelayCommand(StartFreeLearning);
         StartScheduledLearningCommand = new RelayCommand(StartScheduledLearning);
         ShowCardManagementViewCommand = new RelayCommand(ShowCardManagementView);
+        ShowSettingsViewCommand = new RelayCommand(ShowSettingsView);
+        ShowReviewLogViewCommand = new RelayCommand(ShowReviewLogView);
     }
 
     private void StartFreeLearning()
@@ -106,6 +118,20 @@ public class MainViewModel : ViewModelBase
             _cardManagementViewModel.InitCardView();
             CurrentViewModel = _cardManagementViewModel;
         }
+    }
+
+    private void ShowSettingsView() => CurrentViewModel = _settingsViewModel;
+
+    private void ShowReviewLogView()
+    {
+        _reviewLogViewModel.RefreshReviews();
+        CurrentViewModel = _reviewLogViewModel;
+    }
+
+    private void ShowReviewResult(Review review)
+    {
+        _learningResultViewModel.LoadFromReview(review);
+        CurrentViewModel = _learningResultViewModel;
     }
 
     private void SaveNewDeck(string newDeckName)

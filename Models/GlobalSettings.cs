@@ -25,21 +25,46 @@
 
         public static float StreakWeight { get; set; } = 0.1f;
 
+        public static AppSettings ToAppSettings()
+        {
+            return new AppSettings
+            {
+                BaseUnit = BaseUnit,
+
+                AgainStartFactor = AgainStartFactor,
+                HardStartFactor = HardStartFactor,
+                GoodStartFactor = GoodStartFactor,
+                EasyStartFactor = EasyStartFactor,
+
+                AgainMultiplier = AgainMultiplier,
+                HardMultiplier = HardMultiplier,
+                GoodMultiplier = GoodMultiplier,
+                EasyMultiplier = EasyMultiplier,
+
+                StreakWeight = StreakWeight
+            };
+        }
+
+        public static void Apply(AppSettings settings)
+        {
+            BaseUnit = settings.BaseUnit;
+
+            AgainStartFactor = settings.AgainStartFactor;
+            HardStartFactor = settings.HardStartFactor;
+            GoodStartFactor = settings.GoodStartFactor;
+            EasyStartFactor = settings.EasyStartFactor;
+
+            AgainMultiplier = settings.AgainMultiplier;
+            HardMultiplier = settings.HardMultiplier;
+            GoodMultiplier = settings.GoodMultiplier;
+            EasyMultiplier = settings.EasyMultiplier;
+
+            StreakWeight = settings.StreakWeight;
+        }
+
         public static void ResetDefaults()
         {
-            BaseUnit = 1f;
-
-            AgainStartFactor = 1f;
-            HardStartFactor = 2.5f;
-            GoodStartFactor = 8f;
-            EasyStartFactor = 24f * 3f;
-
-            AgainMultiplier = 1f;
-            HardMultiplier = 0.5f;
-            GoodMultiplier = 1.2f;
-            EasyMultiplier = 1.5f;
-
-            StreakWeight = 0.1f;
+            Apply(new AppSettings());
         }
     }
 }

@@ -80,5 +80,11 @@ namespace EZFlash.Models
             OnPropertyChanged(nameof(TotalCount));
             OnPropertyChanged(nameof(DueCount));
         }
+
+        public void AddReview(Review review)
+        {
+            ReviewLog.Insert(0, review);
+            OnPropertyChanged(nameof(ReviewLog));
+        }
     }
 }

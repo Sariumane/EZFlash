@@ -36,6 +36,14 @@
         <DataTemplate DataType="{x:Type viewModels:LearningResultViewModel}">
             <views:LearningResultView />
         </DataTemplate>
+
+        <DataTemplate DataType="{x:Type viewModels:SettingsViewModel}">
+            <views:SettingsView/>
+        </DataTemplate>
+
+        <DataTemplate DataType="{x:Type viewModels:ReviewLogViewModel}">
+            <views:ReviewLogView/>
+        </DataTemplate>
     </Window.Resources>
 
     <!-- Layout -->
@@ -59,29 +67,30 @@
             </Grid.RowDefinitions>
 
             <Button Grid.Row="0"
-                Content="Home"
-                Style="{StaticResource SidebarButtonStyle}"
-                Command="{Binding ShowHomeViewCommand}"/>
+                    Content="Home"
+                    Style="{StaticResource SidebarButtonStyle}"
+                    Command="{Binding ShowHomeViewCommand}"/>
 
             <Border Grid.Row="1" Background="{StaticResource DividerBrush}"/>
 
             <Button Grid.Row="2"
-                Content="Learn Scheduled"
-                Style="{StaticResource SidebarButtonStyle}"
-                Command="{Binding StartScheduledLearningCommand}"/>
+                    Content="Settings"
+                    Style="{StaticResource SidebarButtonStyle}"
+                    Command="{Binding ShowSettingsViewCommand}"/>
 
             <Border Grid.Row="3" Background="{StaticResource DividerBrush}"/>
 
             <Button Grid.Row="4"
-                Content="Card Management"
-                Style="{StaticResource SidebarButtonStyle}"
-                Command="{Binding ShowCardManagementViewCommand}"/>    
+                    Content="Card Management"
+                    Style="{StaticResource SidebarButtonStyle}"
+                    Command="{Binding ShowCardManagementViewCommand}"/>    
 
             <Border Grid.Row="5" Background="{StaticResource DividerBrush}"/>
 
             <Button Grid.Row="6"
-                Content="Stats"
-                Style="{StaticResource SidebarButtonStyle}"/>
+                    Content="Stats"
+                    Style="{StaticResource SidebarButtonStyle}"
+                    Command="{Binding ShowReviewLogViewCommand}"/>
         </Grid>
 
         <!-- Separator -->

@@ -172,18 +172,41 @@ namespace EZFlash.ViewModels
             {
                 ratedCard.RateCard(rating);
                 _currentDeck.NotifyDueCountChanged();
-                _saveDeck(_currentDeck);
             }
 
             _session.MoveNext();
 
             if (_session.IsFinished)
             {
-                LearningFinished?.Invoke(_session.Mode, _session.Results);
+                FinishLearningSession();
                 return;
             }
 
             RefreshView();
+        }
+
+        private void FinishLearningSession()
+        {
+            if (_session == null || _currentDeck == null)
+                return;
+
+            if (_session.Results.Count > 0)
+            {
+                Review review = Review.Create(
+                    _currentDeck,
+                    _session.Mode,
+                    _session.Results
+                );
+
+                _currentDeck.AddReview(review);
+
+                if (_session.Mode == LearningMode.Scheduled)
+                    _currentDeck.NotifyDueCountChanged();
+
+                _saveDeck(_currentDeck);
+            }
+
+            LearningFinished?.Invoke(_session.Mode, _session.Results);
         }
 
         private void RefreshView()

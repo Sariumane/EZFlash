@@ -1,0 +1,285 @@
+﻿<UserControl x:Class="EZFlash.Views.SettingsView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+
+    <UserControl.Resources>
+
+        <Style x:Key="SettingsTextBoxStyle" TargetType="TextBox">
+            <Setter Property="Height" Value="30"/>
+            <Setter Property="Padding" Value="8,3"/>
+            <Setter Property="Background" Value="#243044"/>
+            <Setter Property="Foreground" Value="{StaticResource PrimaryTextBrush}"/>
+            <Setter Property="CaretBrush" Value="#38BDF8"/>
+            <Setter Property="BorderBrush" Value="#3B4A63"/>
+            <Setter Property="BorderThickness" Value="1"/>
+            <Setter Property="VerticalContentAlignment" Value="Center"/>
+        </Style>
+
+        <Style x:Key="SettingsLabelStyle" TargetType="TextBlock">
+            <Setter Property="Foreground" Value="{StaticResource SecondaryTextBrush}"/>
+            <Setter Property="FontSize" Value="13"/>
+            <Setter Property="VerticalAlignment" Value="Center"/>
+        </Style>
+
+        <Style x:Key="SettingsSectionTitleStyle" TargetType="TextBlock">
+            <Setter Property="Foreground" Value="{StaticResource PrimaryTextBrush}"/>
+            <Setter Property="FontSize" Value="20"/>
+            <Setter Property="FontWeight" Value="SemiBold"/>
+            <Setter Property="Margin" Value="0,0,0,12"/>
+        </Style>
+
+        <Style x:Key="SettingsPreviewTextStyle" TargetType="TextBlock">
+            <Setter Property="Foreground" Value="{StaticResource SecondaryTextBrush}"/>
+            <Setter Property="FontSize" Value="12"/>
+            <Setter Property="Margin" Value="0,2,0,0"/>
+        </Style>
+
+    </UserControl.Resources>
+
+    <Grid Background="{StaticResource MainBackgroundBrush}">
+        <ScrollViewer VerticalScrollBarVisibility="Auto"
+                      HorizontalScrollBarVisibility="Disabled">
+
+            <Border Padding="40"
+                    Width="620"
+                    HorizontalAlignment="Center">
+
+                <StackPanel>
+
+                    <TextBlock Text="Settings"
+                               Foreground="{StaticResource PrimaryTextBrush}"
+                               FontSize="32"
+                               FontWeight="SemiBold"
+                               Margin="0,0,0,34"/>
+
+                    <!-- Learning Intervals -->
+                    <TextBlock Text="Learning Intervals"
+                               Style="{StaticResource SettingsSectionTitleStyle}"/>
+
+                    <Border Background="{StaticResource CardManagement.CardBackgroundBrush}"
+                            BorderBrush="{StaticResource CardManagement.CardBorderBrush}"
+                            BorderThickness="1"
+                            CornerRadius="8"
+                            Padding="20"
+                            Margin="0,0,0,28">
+
+                        <StackPanel>
+
+                            <TextBlock Text="Base Unit in hours"
+                                       Style="{StaticResource SettingsLabelStyle}"/>
+
+                            <TextBox Text="{Binding BaseUnit, UpdateSourceTrigger=LostFocus}"
+                                     Style="{StaticResource SettingsTextBoxStyle}"
+                                     Margin="0,6,0,4"/>
+
+                            <TextBlock Text="{Binding BaseIntervalPreview}"
+                                       Style="{StaticResource SettingsPreviewTextStyle}"
+                                       Margin="0,0,0,18"/>
+
+                            <TextBlock Text="Start Factors"
+                                       Foreground="{StaticResource PrimaryTextBrush}"
+                                       FontSize="16"
+                                       FontWeight="SemiBold"
+                                       Margin="0,0,0,6"/>
+
+                            <TextBlock Text="Start factors are multiplied with the base unit to calculate the first review interval."
+                                       Foreground="{StaticResource SecondaryTextBrush}"
+                                       FontSize="12"
+                                       TextWrapping="Wrap"
+                                       Margin="0,0,0,16"/>
+
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="180"/>
+                                    <ColumnDefinition Width="*"/>
+                                </Grid.ColumnDefinitions>
+
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="Auto"/>
+                                    <RowDefinition Height="Auto"/>
+                                    <RowDefinition Height="Auto"/>
+                                    <RowDefinition Height="Auto"/>
+                                </Grid.RowDefinitions>
+
+                                <TextBlock Grid.Row="0"
+                                           Grid.Column="0"
+                                           Text="Again Start Factor"
+                                           Style="{StaticResource SettingsLabelStyle}"/>
+
+                                <TextBox Grid.Row="0"
+                                         Grid.Column="1"
+                                         Text="{Binding AgainStartFactor, UpdateSourceTrigger=LostFocus}"
+                                         Style="{StaticResource SettingsTextBoxStyle}"
+                                         Margin="12,0,0,10"/>
+
+                                <TextBlock Grid.Row="1"
+                                           Grid.Column="0"
+                                           Text="Hard Start Factor"
+                                           Style="{StaticResource SettingsLabelStyle}"/>
+
+                                <TextBox Grid.Row="1"
+                                         Grid.Column="1"
+                                         Text="{Binding HardStartFactor, UpdateSourceTrigger=LostFocus}"
+                                         Style="{StaticResource SettingsTextBoxStyle}"
+                                         Margin="12,0,0,10"/>
+
+                                <TextBlock Grid.Row="2"
+                                           Grid.Column="0"
+                                           Text="Good Start Factor"
+                                           Style="{StaticResource SettingsLabelStyle}"/>
+
+                                <TextBox Grid.Row="2"
+                                         Grid.Column="1"
+                                         Text="{Binding GoodStartFactor, UpdateSourceTrigger=LostFocus}"
+                                         Style="{StaticResource SettingsTextBoxStyle}"
+                                         Margin="12,0,0,10"/>
+
+                                <TextBlock Grid.Row="3"
+                                           Grid.Column="0"
+                                           Text="Easy Start Factor"
+                                           Style="{StaticResource SettingsLabelStyle}"/>
+
+                                <TextBox Grid.Row="3"
+                                         Grid.Column="1"
+                                         Text="{Binding EasyStartFactor, UpdateSourceTrigger=LostFocus}"
+                                         Style="{StaticResource SettingsTextBoxStyle}"
+                                         Margin="12,0,0,0"/>
+                            </Grid>
+
+                            <Border Background="#0F172A"
+                                    BorderBrush="#334155"
+                                    BorderThickness="1"
+                                    CornerRadius="6"
+                                    Padding="12"
+                                    Margin="0,18,0,0">
+
+                                <StackPanel>
+                                    <TextBlock Text="{Binding AgainStartPreview}"
+                                               Style="{StaticResource SettingsPreviewTextStyle}"/>
+
+                                    <TextBlock Text="{Binding HardStartPreview}"
+                                               Style="{StaticResource SettingsPreviewTextStyle}"/>
+
+                                    <TextBlock Text="{Binding GoodStartPreview}"
+                                               Style="{StaticResource SettingsPreviewTextStyle}"/>
+
+                                    <TextBlock Text="{Binding EasyStartPreview}"
+                                               Style="{StaticResource SettingsPreviewTextStyle}"/>
+                                </StackPanel>
+                            </Border>
+                        </StackPanel>
+                    </Border>
+
+                    <!-- Rating Multipliers -->
+                    <TextBlock Text="Rating Multipliers"
+                               Style="{StaticResource SettingsSectionTitleStyle}"/>
+
+                    <Border Background="{StaticResource CardManagement.CardBackgroundBrush}"
+                            BorderBrush="{StaticResource CardManagement.CardBorderBrush}"
+                            BorderThickness="1"
+                            CornerRadius="8"
+                            Padding="20"
+                            Margin="0,0,0,28">
+
+                        <StackPanel>
+
+                            <TextBlock Text="Multipliers adjust the next interval after a card has already been reviewed."
+                                       Foreground="{StaticResource SecondaryTextBrush}"
+                                       FontSize="12"
+                                       TextWrapping="Wrap"
+                                       Margin="0,0,0,16"/>
+
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="180"/>
+                                    <ColumnDefinition Width="*"/>
+                                </Grid.ColumnDefinitions>
+
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="Auto"/>
+                                    <RowDefinition Height="Auto"/>
+                                    <RowDefinition Height="Auto"/>
+                                    <RowDefinition Height="Auto"/>
+                                    <RowDefinition Height="Auto"/>
+                                </Grid.RowDefinitions>
+
+                                <TextBlock Grid.Row="0"
+                                           Grid.Column="0"
+                                           Text="Again Multiplier"
+                                           Style="{StaticResource SettingsLabelStyle}"/>
+
+                                <TextBox Grid.Row="0"
+                                         Grid.Column="1"
+                                         Text="{Binding AgainMultiplier, UpdateSourceTrigger=LostFocus}"
+                                         Style="{StaticResource SettingsTextBoxStyle}"
+                                         Margin="12,0,0,10"/>
+
+                                <TextBlock Grid.Row="1"
+                                           Grid.Column="0"
+                                           Text="Hard Multiplier"
+                                           Style="{StaticResource SettingsLabelStyle}"/>
+
+                                <TextBox Grid.Row="1"
+                                         Grid.Column="1"
+                                         Text="{Binding HardMultiplier, UpdateSourceTrigger=LostFocus}"
+                                         Style="{StaticResource SettingsTextBoxStyle}"
+                                         Margin="12,0,0,10"/>
+
+                                <TextBlock Grid.Row="2"
+                                           Grid.Column="0"
+                                           Text="Good Multiplier"
+                                           Style="{StaticResource SettingsLabelStyle}"/>
+
+                                <TextBox Grid.Row="2"
+                                         Grid.Column="1"
+                                         Text="{Binding GoodMultiplier, UpdateSourceTrigger=LostFocus}"
+                                         Style="{StaticResource SettingsTextBoxStyle}"
+                                         Margin="12,0,0,10"/>
+
+                                <TextBlock Grid.Row="3"
+                                           Grid.Column="0"
+                                           Text="Easy Multiplier"
+                                           Style="{StaticResource SettingsLabelStyle}"/>
+
+                                <TextBox Grid.Row="3"
+                                         Grid.Column="1"
+                                         Text="{Binding EasyMultiplier, UpdateSourceTrigger=LostFocus}"
+                                         Style="{StaticResource SettingsTextBoxStyle}"
+                                         Margin="12,0,0,10"/>
+
+                                <TextBlock Grid.Row="4"
+                                           Grid.Column="0"
+                                           Text="Streak Weight"
+                                           Style="{StaticResource SettingsLabelStyle}"/>
+
+                                <TextBox Grid.Row="4"
+                                         Grid.Column="1"
+                                         Text="{Binding StreakWeight, UpdateSourceTrigger=LostFocus}"
+                                         Style="{StaticResource SettingsTextBoxStyle}"
+                                         Margin="12,0,0,0"/>
+                            </Grid>
+                        </StackPanel>
+                    </Border>
+
+                    <!-- Buttons -->
+                    <StackPanel Orientation="Horizontal"
+                                HorizontalAlignment="Right"
+                                Margin="0,0,0,20">
+
+                        <Button Content="Reset"
+                                Command="{Binding ResetSettingsCommand}"
+                                Style="{StaticResource CardManagement.NewButtonStyle}"
+                                Width="120"
+                                Margin="0,0,12,0"/>
+
+                        <Button Content="Save"
+                                Command="{Binding SaveSettingsCommand}"
+                                Style="{StaticResource CardManagement.NewButtonStyle}"
+                                Width="120"/>
+                    </StackPanel>
+
+                </StackPanel>
+            </Border>
+        </ScrollViewer>
+    </Grid>
+</UserControl>

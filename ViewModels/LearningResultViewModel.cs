@@ -7,6 +7,10 @@ namespace EZFlash.ViewModels
     {
         private readonly Action _showHomeView;
 
+        private bool _isLoadedFromReviewLog;
+        private DateTime? _reviewedAt;
+        private string _reviewDeckName = "";
+
         public RelayCommand BackHomeCommand { get; }
 
         public LearningMode Mode { get; private set; }
@@ -19,15 +23,31 @@ namespace EZFlash.ViewModels
 
         public double Score { get; private set; }
 
-        public string Title =>
-            Mode == LearningMode.Free
-                ? "Free Learning abgeschlossen"
-                : "Scheduled Learning abgeschlossen";
+        public string Title
+        {
+            get
+            {
+                if (_isLoadedFromReviewLog)
+                    return "Review-Auswertung";
 
-        public string Subtitle =>
-            Mode == LearningMode.Free
-                ? "Hier ist deine Auswertung für das gesamte Deck."
-                : "Hier ist deine Auswertung für die fälligen Karten.";
+                return Mode == LearningMode.Free
+                    ? "Free Learning abgeschlossen"
+                    : "Scheduled Learning abgeschlossen";
+            }
+        }
+
+        public string Subtitle
+        {
+            get
+            {
+                if (_isLoadedFromReviewLog && _reviewedAt != null)
+                    return $"{_reviewDeckName} · {_reviewedAt.Value:dd.MM.yyyy HH:mm}";
+
+                return Mode == LearningMode.Free
+                    ? "Hier ist deine Auswertung für das gesamte Deck."
+                    : "Hier ist deine Auswertung für die fälligen Karten.";
+            }
+        }
 
         public string ScoreText => $"{Score:0}%";
 
@@ -39,6 +59,10 @@ namespace EZFlash.ViewModels
 
         public void Load(LearningMode mode, IReadOnlyList<CardReviewResult> results)
         {
+            _isLoadedFromReviewLog = false;
+            _reviewedAt = null;
+            _reviewDeckName = "";
+
             Mode = mode;
 
             TotalCards = results.Count;
@@ -50,6 +74,31 @@ namespace EZFlash.ViewModels
 
             Score = CalculateScore();
 
+            NotifyAllResultPropertiesChanged();
+        }
+
+        public void LoadFromReview(Review review)
+        {
+            _isLoadedFromReviewLog = true;
+            _reviewedAt = review.ReviewedAt;
+            _reviewDeckName = review.DeckName;
+
+            Mode = review.Mode;
+
+            TotalCards = review.TotalCards;
+
+            AgainCount = review.AgainCount;
+            HardCount = review.HardCount;
+            GoodCount = review.GoodCount;
+            EasyCount = review.EasyCount;
+
+            Score = CalculateScore();
+
+            NotifyAllResultPropertiesChanged();
+        }
+
+        private void NotifyAllResultPropertiesChanged()
+        {
             OnPropertyChanged(nameof(Mode));
             OnPropertyChanged(nameof(Title));
             OnPropertyChanged(nameof(Subtitle));

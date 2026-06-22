@@ -8,6 +8,7 @@ namespace EZFlash;
 public partial class App : Application
 {
     private DeckStore? _deckStore;
+    private SettingsStore? _settingsStore;
     private MainWindow? _mainWindow;
     private MainViewModel? _mainViewModel;
 
@@ -16,7 +17,8 @@ public partial class App : Application
         base.OnStartup(e);
 
         _deckStore = new DeckStore();
-        _mainViewModel = new MainViewModel(_deckStore);
+        _settingsStore = new SettingsStore();
+        _mainViewModel = new MainViewModel(_deckStore, _settingsStore);
         _mainWindow = new MainWindow
         {
             DataContext = _mainViewModel
@@ -30,6 +32,7 @@ public partial class App : Application
         if (_deckStore != null)
         {
             _deckStore?.SaveAllDecksToDisk();
+            _settingsStore?.SaveSettingsToDisk();
         }
 
         base.OnExit(e);
