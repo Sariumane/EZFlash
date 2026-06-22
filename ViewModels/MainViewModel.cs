@@ -1,4 +1,3 @@
-
 using System.Windows;
 using System.Windows.Input;
 using EZFlash.Commands;
@@ -8,13 +7,13 @@ namespace EZFlash.ViewModels;
 
 public class MainViewModel : ViewModelBase
 {
-
     private ViewModelBase _currentViewModel;
     private HomeViewModel _homeViewModel;
-    private LearnScheduledViewModel _learnScheduledViewModel;
     private CardManagementViewModel _cardManagementViewModel;
+    private LearningViewModel _learningViewModel;
+    private LearningResultViewModel _learningResultViewModel;
+
     private DeckStore _deckStore;
-    
 
     public ViewModelBase CurrentViewModel
     {
@@ -27,38 +26,69 @@ public class MainViewModel : ViewModelBase
     }
 
     public ICommand ShowHomeViewCommand { get; }
-    public ICommand ShowLearnScheduledViewCommand { get; }
-    public ICommand ShowLearnFreeViewCommand { get; }
+    public ICommand StartFreeLearningCommand { get; }
+    public ICommand StartScheduledLearningCommand { get; }
     public ICommand ShowCardManagementViewCommand { get; }
 
     public MainViewModel(DeckStore deckStore)
     {
         _deckStore = deckStore;
-        _homeViewModel = new (_deckStore.Inventory.Decks, 
-            ShowLearnScheduledView, ShowLearnFreeView, ShowCardManagementView, 
-            DeleteDeck, SaveNewDeck, SaveExistingDeck);
-        _learnScheduledViewModel = new ();
-        _cardManagementViewModel = new(SaveExistingDeck, ShowHomeView);
 
-        
+        _homeViewModel = new HomeViewModel(
+            _deckStore.Inventory.Decks,
+            StartScheduledLearning,
+            StartFreeLearning,
+            ShowCardManagementView,
+            DeleteDeck,
+            SaveNewDeck,
+            SaveExistingDeck
+        );
+
+        _cardManagementViewModel = new CardManagementViewModel(
+            SaveExistingDeck,
+            ShowHomeView
+        );
+
+        _learningViewModel = new LearningViewModel(SaveExistingDeck);
+
+        _learningResultViewModel = new LearningResultViewModel(ShowHomeView);
+
+        _learningViewModel.LearningFinished += OnLearningFinished;
+
         CurrentViewModel = _homeViewModel;
 
         ShowHomeViewCommand = new RelayCommand(ShowHomeView);
-        ShowLearnScheduledViewCommand = new RelayCommand(ShowLearnScheduledView);
+        StartFreeLearningCommand = new RelayCommand(StartFreeLearning);
+        StartScheduledLearningCommand = new RelayCommand(StartScheduledLearning);
         ShowCardManagementViewCommand = new RelayCommand(ShowCardManagementView);
     }
 
-
-    private void ShowLearnScheduledView()
+    private void StartFreeLearning()
     {
-        CurrentViewModel = _learnScheduledViewModel;
+        Deck? currentDeck = _homeViewModel.SelectedDeck;
 
+        if (currentDeck == null)
+            return;
+
+        _learningViewModel.StartFreeLearning(currentDeck);
+        CurrentViewModel = _learningViewModel;
     }
 
-    private void ShowLearnFreeView()
+    private void StartScheduledLearning()
     {
-        CurrentViewModel = _learnScheduledViewModel;
+        Deck? currentDeck = _homeViewModel.SelectedDeck;
 
+        if (currentDeck == null)
+            return;
+
+        _learningViewModel.StartScheduledLearning(currentDeck);
+        CurrentViewModel = _learningViewModel;
+    }
+
+    private void OnLearningFinished(LearningMode mode, IReadOnlyList<CardReviewResult> results)
+    {
+        _learningResultViewModel.Load(mode, results);
+        CurrentViewModel = _learningResultViewModel;
     }
 
     private void ShowHomeView()
@@ -69,7 +99,8 @@ public class MainViewModel : ViewModelBase
     private void ShowCardManagementView()
     {
         Deck? currentDeck = _homeViewModel.SelectedDeck;
-        if(currentDeck != null)
+
+        if (currentDeck != null)
         {
             _cardManagementViewModel.CurrentDeck = currentDeck;
             _cardManagementViewModel.InitCardView();
@@ -83,12 +114,16 @@ public class MainViewModel : ViewModelBase
         _deckStore.SaveDeckToDisk(deck);
     }
 
-    private void SaveExistingDeck(Deck deck) => _deckStore.SaveDeckToDisk(deck);
+    private void SaveExistingDeck(Deck deck)
+    {
+        _deckStore.SaveDeckToDisk(deck);
+    }
 
     private void DeleteDeck()
     {
         if (_homeViewModel.SelectedDeck == null)
             return;
+
         _deckStore.DeleteDeckFromDisk(_homeViewModel.SelectedDeck);
         _homeViewModel.SelectedDeck = null;
     }

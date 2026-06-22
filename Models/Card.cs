@@ -1,4 +1,4 @@
-﻿
+﻿using System.Text.Json.Serialization;
 
 namespace EZFlash.Models
 {
@@ -10,46 +10,55 @@ namespace EZFlash.Models
         public string Front { get; set; }
         public string Back { get; set; }
 
+        [JsonInclude]
         public DateTime? ReviewedAt { get; private set; }
+
+        [JsonInclude]
         public DateTime? NextReviewDate { get; private set; }
+
+        [JsonInclude]
         public int Streak { get; private set; } = 0;
+
+        [JsonInclude]
         public int ReviewCount { get; private set; } = 0;
+
+        [JsonInclude]
         public float Interval { get; private set; }
 
+        [JsonInclude]
         public CardRating LastRating { get; private set; }
 
-
+        [JsonIgnore]
+        public bool IsDue =>
+            NextReviewDate == null || NextReviewDate.Value <= DateTime.UtcNow;
 
         public Card(string front = "", string back = "")
         {
-            this.Front = front;
-            this.Back = back;
+            Front = front;
+            Back = back;
         }
-
-
 
         public void RateCard(CardRating rating)
         {
             ReviewedAt = DateTime.UtcNow;
             LastRating = rating;
-            float secondsToBeAdded;
 
             UpdateStreak(rating);
+
+            float secondsToBeAdded;
             (Interval, secondsToBeAdded) = CalculateIntervalInSeconds(rating);
 
             NextReviewDate = ReviewedAt.Value.AddSeconds(secondsToBeAdded);
             ReviewCount++;
         }
 
-
-
         private (float nextInterval, float secondsToBeAdded) CalculateIntervalInSeconds(CardRating rating)
         {
             float currentInterval = Interval;
             float streakFactor = 1f;
             float secondsToBeAdded;
-            
-            if(ReviewCount == 0)
+
+            if (ReviewCount == 0)
             {
                 currentInterval = rating switch
                 {
@@ -59,13 +68,12 @@ namespace EZFlash.Models
                     CardRating.Easy => GlobalSettings.EasyStartInterval,
                     _ => throw new ArgumentOutOfRangeException(nameof(rating), rating, null)
                 };
+
                 return (currentInterval, currentInterval);
             }
 
-           
             if (rating == CardRating.Good || rating == CardRating.Easy)
                 streakFactor = 1 + Streak * GlobalSettings.StreakWeight;
-            
 
             float multiplier = rating switch
             {
@@ -78,12 +86,10 @@ namespace EZFlash.Models
 
             currentInterval *= multiplier;
 
-
-            if(rating == CardRating.Again)
+            if (rating == CardRating.Again)
                 secondsToBeAdded = GlobalSettings.AgainStartInterval;
             else
                 secondsToBeAdded = currentInterval;
-
 
             return (currentInterval, secondsToBeAdded);
         }
@@ -91,21 +97,9 @@ namespace EZFlash.Models
         private void UpdateStreak(CardRating rating)
         {
             if (rating == CardRating.Good || rating == CardRating.Easy)
-            {
                 Streak++;
-            }
             else
-            {
                 Streak = 0;
-            }
-        }
-
-        public enum CardRating
-        {
-            Again = 0,
-            Hard = 1,
-            Good = 2,
-            Easy = 3
         }
     }
 }

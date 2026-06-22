@@ -129,7 +129,13 @@ namespace EZFlash.ViewModels
             }
         }
 
-        private void AbortEdit() => CurrentEditorViewModel = _cardViewModel;
+        private void AbortEdit()
+        {
+            CurrentCard = CurrentDeck[CurrentCardIndex];
+            _cardViewModel.Question = CurrentCard.Front;
+            _cardViewModel.Answer = CurrentCard.Back;
+            CurrentEditorViewModel = _cardViewModel;
+        }
 
         private void SaveExistingCard()
         {
@@ -147,6 +153,8 @@ namespace EZFlash.ViewModels
             _createOrEditCardViewModel.CardInEdit = _cardInEdit;
             _createOrEditCardViewModel.Question = "";
             _createOrEditCardViewModel.Answer = "";
+            CurrentCardIndex++;
+            OnPropertyChanged(nameof(CardPositionText));
         }
 
         private void DeleteCurrentCard()
@@ -181,20 +189,43 @@ namespace EZFlash.ViewModels
 
         private void NextCard()
         {
-            if((CurrentCardIndex+1)<CurrentDeck.TotalCount)
-                CurrentCardIndex++;
-            CurrentCard = CurrentDeck[CurrentCardIndex];
-            _cardViewModel.Question = CurrentCard.Front;
-            _cardViewModel.Answer = CurrentCard.Back;
+            if (CurrentDeck.TotalCount == 0)
+            {
+                CurrentCardIndex = 0;
+                CurrentCard = null;
+            }
+            else
+            {
+                if (CurrentCardIndex < CurrentDeck.TotalCount - 1)
+                    CurrentCardIndex++;
+
+                CurrentCard = CurrentDeck[CurrentCardIndex];
+            }
+
+            _cardViewModel.Question = CurrentCard?.Front ?? "";
+            _cardViewModel.Answer = CurrentCard?.Back ?? "";
+
             OnPropertyChanged(nameof(CardPositionText));
         }
+
         private void PreviousCard()
         {
-            if (CurrentCardIndex > 0)
-                CurrentCardIndex--;
-            CurrentCard = CurrentDeck[CurrentCardIndex];
-            _cardViewModel.Question = CurrentCard.Front;
-            _cardViewModel.Answer = CurrentCard.Back;
+            if (CurrentDeck.TotalCount == 0)
+            {
+                CurrentCardIndex = 0;
+                CurrentCard = null;
+            }
+            else
+            {
+                if (CurrentCardIndex > 0)
+                    CurrentCardIndex--;
+
+                CurrentCard = CurrentDeck[CurrentCardIndex];
+            }
+
+            _cardViewModel.Question = CurrentCard?.Front ?? "";
+            _cardViewModel.Answer = CurrentCard?.Back ?? "";
+
             OnPropertyChanged(nameof(CardPositionText));
         }
     }

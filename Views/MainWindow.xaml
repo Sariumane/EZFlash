@@ -24,13 +24,17 @@
         <DataTemplate DataType="{x:Type viewModels:HomeViewModel}">
             <views:HomeView />
         </DataTemplate>
-        
-        <DataTemplate DataType="{x:Type viewModels:LearnScheduledViewModel}">
-            <views:LearnScheduledView />
-        </DataTemplate>
 
         <DataTemplate DataType="{x:Type viewModels:CardManagementViewModel}">
             <views:CardManagementView />
+        </DataTemplate>
+
+        <DataTemplate DataType="{x:Type viewModels:LearningViewModel}">
+            <views:LearningView />
+        </DataTemplate>
+
+        <DataTemplate DataType="{x:Type viewModels:LearningResultViewModel}">
+            <views:LearningResultView />
         </DataTemplate>
     </Window.Resources>
 
@@ -64,7 +68,7 @@
             <Button Grid.Row="2"
                 Content="Learn Scheduled"
                 Style="{StaticResource SidebarButtonStyle}"
-                Command="{Binding ShowLearnScheduledViewCommand}"/>
+                Command="{Binding StartScheduledLearningCommand}"/>
 
             <Border Grid.Row="3" Background="{StaticResource DividerBrush}"/>
 

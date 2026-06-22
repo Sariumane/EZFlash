@@ -21,7 +21,7 @@
                             <ContextMenu DataContext="{Binding PlacementTarget.Tag,
                                           RelativeSource={RelativeSource Self}}">
                                 <MenuItem Header="Learn Scheduled"
-                                          Command="{Binding LearnScheduledCommand}">
+                                          Command="{Binding StartLearnScheduledCommand}">
                                     <MenuItem.Icon>
                                         <Image Source="/Assets/learn-scheduled.png"
                                                Width="14"
@@ -31,7 +31,7 @@
                                 </MenuItem>
 
                                 <MenuItem Header="Learn Free"
-                                          Command="{Binding LearnFreeCommand}" >
+                                          Command="{Binding StartLearnFreeCommand}" >
                                     <MenuItem.Icon>
                                         <Image Source="/Assets/learn-free.png"
                                                Width="14"

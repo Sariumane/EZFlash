@@ -43,20 +43,24 @@ namespace EZFlash.ViewModels
         public bool CanCreateDeck => NewDeckName != "";
 
         public ObservableCollection<Deck> Library { get; init; }
-        public ICommand LearnScheduledCommand { get; }
-        public ICommand LearnFreeCommand { get; }
+        public ICommand StartLearnScheduledCommand { get; }
+        public ICommand StartLearnFreeCommand { get; }
         public ICommand EditDeckCommand { get; }
         public ICommand SaveNewDeckCommand { get; }
         public ICommand DeleteDeckCommand { get; }
         public ICommand RenameDeckCommand { get; }
 
         public HomeViewModel(ObservableCollection<Deck> library, 
-            Action learnScheduled, Action learnFree, Action editDeck, 
-            Action deleteDeck, Action<string> saveDeck, Action<Deck> saveExistingDeck)
+            Action startLearnScheduled, 
+            Action startLearnFree, 
+            Action editDeck, 
+            Action deleteDeck, 
+            Action<string> saveDeck, 
+            Action<Deck> saveExistingDeck)
         {
             Library = library;
-            LearnScheduledCommand = new RelayCommand(learnScheduled);
-            LearnFreeCommand = new RelayCommand(learnFree);
+            StartLearnScheduledCommand = new RelayCommand(startLearnScheduled);
+            StartLearnFreeCommand = new RelayCommand(startLearnFree);
             EditDeckCommand = new RelayCommand(editDeck);
             RenameDeckCommand = new RelayCommand(RenameSelectedDeck);
             DeleteDeckCommand = new RelayCommand(deleteDeck);
