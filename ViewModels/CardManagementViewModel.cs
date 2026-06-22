@@ -1,4 +1,6 @@
-﻿using System.Windows.Input;
+﻿using System.Windows;
+using System.Windows.Input;
+using System.Windows.Threading;
 using EZFlash.Models;
 using EZFlash.Commands;
 
@@ -15,6 +17,10 @@ namespace EZFlash.ViewModels
 
         private Action? _exit;
 
+        private readonly DispatcherTimer _reviewTimer;
+        private bool _isReviewTimerEnabled;
+        private string _reviewTimerText = "";
+
         public Deck CurrentDeck
         {
             get => _currentDeck;
@@ -27,6 +33,9 @@ namespace EZFlash.ViewModels
                     ? CurrentDeck[0]
                     : null;
 
+                UpdateCardView();
+                UpdateReviewTimerText();
+
                 OnPropertyChanged();
                 OnPropertyChanged(nameof(CurrentDeckName));
                 OnPropertyChanged(nameof(CurrentCard));
@@ -38,12 +47,42 @@ namespace EZFlash.ViewModels
         public int CurrentCardIndex { get; private set; }
         public string CurrentDeckName => CurrentDeck.Name;
 
-
         public string CardPositionText =>
             CurrentDeck.TotalCount == 0
-                ? "Keine Karten"
+                ? "No cards"
                 : $"{CurrentCardIndex + 1} / {CurrentDeck.TotalCount}";
 
+        public bool IsReviewTimerEnabled
+        {
+            get => _isReviewTimerEnabled;
+            private set
+            {
+                _isReviewTimerEnabled = value;
+                OnPropertyChanged();
+                OnPropertyChanged(nameof(ReviewTimerVisibility));
+                OnPropertyChanged(nameof(ReviewTimerButtonText));
+            }
+        }
+
+        public string ReviewTimerText
+        {
+            get => _reviewTimerText;
+            private set
+            {
+                _reviewTimerText = value;
+                OnPropertyChanged();
+            }
+        }
+
+        public Visibility ReviewTimerVisibility =>
+            IsReviewTimerEnabled
+                ? Visibility.Visible
+                : Visibility.Collapsed;
+
+        public string ReviewTimerButtonText =>
+            IsReviewTimerEnabled
+                ? "Hide Review Timer"
+                : "Show Review Timer";
 
         public ViewModelBase? CurrentEditorViewModel
         {
@@ -60,46 +99,113 @@ namespace EZFlash.ViewModels
         public ICommand CreateNewCardCommand { get; }
         public ICommand EditCurrentCardCommand { get; }
         public ICommand DeleteCurrentCardCommand { get; }
-        public ICommand NextCardCommand { get;  }
-        public ICommand PreviousCardCommand {  get; }
+        public ICommand NextCardCommand { get; }
+        public ICommand PreviousCardCommand { get; }
         public ICommand AbortCommand { get; }
-        
+        public ICommand ToggleReviewTimerCommand { get; }
 
-
-        public CardManagementViewModel(Action<Deck> saveDeck, Action exit){
-
+        public CardManagementViewModel(Action<Deck> saveDeck, Action exit)
+        {
             _exit = exit;
             SaveDeck = saveDeck;
+
+            _reviewTimer = new DispatcherTimer
+            {
+                Interval = TimeSpan.FromSeconds(1)
+            };
+
+            _reviewTimer.Tick += (_, _) => UpdateReviewTimerText();
 
             CreateNewCardCommand = new RelayCommand(ShowCreateNewCardView);
             EditCurrentCardCommand = new RelayCommand(ShowEditCardView);
             NextCardCommand = new RelayCommand(NextCard);
             PreviousCardCommand = new RelayCommand(PreviousCard);
             DeleteCurrentCardCommand = new RelayCommand(DeleteCurrentCard);
+            ToggleReviewTimerCommand = new RelayCommand(ToggleReviewTimer);
 
             _createOrEditCardViewModel = new(AbortEdit);
 
             AbortCommand = new RelayCommand(() =>
             {
-                if(_currentEditorViewModel == _cardViewModel)
+                if (_currentEditorViewModel == _cardViewModel)
                 {
+                    _reviewTimer.Stop();
+                    IsReviewTimerEnabled = false;
+
                     _exit();
                     return;
                 }
+
                 AbortEdit();
             });
 
             _cardViewModel = new();
-            _cardViewModel.Answer = CurrentCard?.Front ?? "";
-            _cardViewModel.Question = CurrentCard?.Back ?? "";
+            _cardViewModel.Question = CurrentCard?.Front ?? "";
+            _cardViewModel.Answer = CurrentCard?.Back ?? "";
             _currentEditorViewModel = _cardViewModel;
-
         }
-
 
         public void InitCardView()
         {
             _currentEditorViewModel = _cardViewModel;
+            UpdateCardView();
+            UpdateReviewTimerText();
+            OnPropertyChanged(nameof(CurrentEditorViewModel));
+        }
+
+        private void ToggleReviewTimer()
+        {
+            IsReviewTimerEnabled = !IsReviewTimerEnabled;
+
+            if (IsReviewTimerEnabled)
+            {
+                UpdateReviewTimerText();
+                _reviewTimer.Start();
+            }
+            else
+            {
+                _reviewTimer.Stop();
+            }
+        }
+
+        private void UpdateReviewTimerText()
+        {
+            if (CurrentCard == null)
+            {
+                ReviewTimerText = "No card selected";
+                return;
+            }
+
+            if (CurrentCard.NextReviewDate == null)
+            {
+                ReviewTimerText = "Due now";
+                CurrentDeck.NotifyDueCountChanged();
+                return;
+            }
+
+            TimeSpan remaining = CurrentCard.NextReviewDate.Value - DateTime.UtcNow;
+
+            if (remaining <= TimeSpan.Zero)
+            {
+                ReviewTimerText = "Due now";
+                CurrentDeck.NotifyDueCountChanged();
+                return;
+            }
+
+            if (remaining.TotalDays >= 1)
+            {
+                ReviewTimerText =
+                    $"Next review in {(int)remaining.TotalDays}d {remaining.Hours:00}:{remaining.Minutes:00}:{remaining.Seconds:00}";
+            }
+            else
+            {
+                ReviewTimerText =
+                    $"Next review in {remaining.Hours:00}:{remaining.Minutes:00}:{remaining.Seconds:00}";
+            }
+        }
+
+        private void UpdateCardView()
+        {
             _cardViewModel.Question = CurrentCard?.Front ?? "";
             _cardViewModel.Answer = CurrentCard?.Back ?? "";
         }
@@ -117,7 +223,7 @@ namespace EZFlash.ViewModels
 
         private void ShowEditCardView()
         {
-            if(CurrentCard != null)
+            if (CurrentCard != null)
             {
                 CurrentEditorViewModel = _createOrEditCardViewModel;
 
@@ -131,17 +237,31 @@ namespace EZFlash.ViewModels
 
         private void AbortEdit()
         {
-            CurrentCard = CurrentDeck[CurrentCardIndex];
-            _cardViewModel.Question = CurrentCard.Front;
-            _cardViewModel.Answer = CurrentCard.Back;
+            if (CurrentDeck.TotalCount == 0)
+            {
+                CurrentCard = null;
+            }
+            else
+            {
+                CurrentCard = CurrentDeck[CurrentCardIndex];
+            }
+
+            UpdateCardView();
+            UpdateReviewTimerText();
+
             CurrentEditorViewModel = _cardViewModel;
+
+            OnPropertyChanged(nameof(CurrentCard));
+            OnPropertyChanged(nameof(CardPositionText));
         }
 
         private void SaveExistingCard()
         {
             SaveDeck(CurrentDeck);
-            _cardViewModel.Question = CurrentCard?.Front ?? "";
-            _cardViewModel.Answer = CurrentCard?.Back ?? "";
+
+            UpdateCardView();
+            UpdateReviewTimerText();
+
             CurrentEditorViewModel = _cardViewModel;
         }
 
@@ -149,11 +269,18 @@ namespace EZFlash.ViewModels
         {
             CurrentDeck.AddCard(_cardInEdit);
             SaveDeck(CurrentDeck);
+
+            CurrentCardIndex = CurrentDeck.TotalCount - 1;
+            CurrentCard = CurrentDeck[CurrentCardIndex];
+
             _cardInEdit = new();
             _createOrEditCardViewModel.CardInEdit = _cardInEdit;
             _createOrEditCardViewModel.Question = "";
             _createOrEditCardViewModel.Answer = "";
-            CurrentCardIndex++;
+
+            UpdateReviewTimerText();
+
+            OnPropertyChanged(nameof(CurrentCard));
             OnPropertyChanged(nameof(CardPositionText));
         }
 
@@ -169,9 +296,6 @@ namespace EZFlash.ViewModels
             {
                 CurrentCardIndex = 0;
                 CurrentCard = null;
-
-                _cardViewModel.Question = "";
-                _cardViewModel.Answer = "";
             }
             else
             {
@@ -179,11 +303,12 @@ namespace EZFlash.ViewModels
                     CurrentCardIndex = CurrentDeck.TotalCount - 1;
 
                 CurrentCard = CurrentDeck[CurrentCardIndex];
-
-                _cardViewModel.Question = CurrentCard.Front;
-                _cardViewModel.Answer = CurrentCard.Back;
             }
 
+            UpdateCardView();
+            UpdateReviewTimerText();
+
+            OnPropertyChanged(nameof(CurrentCard));
             OnPropertyChanged(nameof(CardPositionText));
         }
 
@@ -202,9 +327,10 @@ namespace EZFlash.ViewModels
                 CurrentCard = CurrentDeck[CurrentCardIndex];
             }
 
-            _cardViewModel.Question = CurrentCard?.Front ?? "";
-            _cardViewModel.Answer = CurrentCard?.Back ?? "";
+            UpdateCardView();
+            UpdateReviewTimerText();
 
+            OnPropertyChanged(nameof(CurrentCard));
             OnPropertyChanged(nameof(CardPositionText));
         }
 
@@ -223,9 +349,10 @@ namespace EZFlash.ViewModels
                 CurrentCard = CurrentDeck[CurrentCardIndex];
             }
 
-            _cardViewModel.Question = CurrentCard?.Front ?? "";
-            _cardViewModel.Answer = CurrentCard?.Back ?? "";
+            UpdateCardView();
+            UpdateReviewTimerText();
 
+            OnPropertyChanged(nameof(CurrentCard));
             OnPropertyChanged(nameof(CardPositionText));
         }
     }
