@@ -1,8 +1,5 @@
 ﻿using System.IO;
 using System.Text.Json;
-using System.Collections.ObjectModel;
-using System.Windows.Media.Animation;
-using System.Windows;
 
 namespace EZFlash.Models
 {
@@ -11,7 +8,6 @@ namespace EZFlash.Models
         private JsonSerializerOptions _options = new();
         private string _appDir;
         private string _deckPath;
-        private string _reviewPath;
 
         public DeckCollection Inventory { get; private set; } = new();
 
@@ -21,17 +17,15 @@ namespace EZFlash.Models
 
             _appDir = AppContext.BaseDirectory;
             _deckPath = Path.Combine(_appDir, "decks");
-            _reviewPath = Path.Combine(_appDir, "reviews");
 
             Directory.CreateDirectory(_deckPath);
-            Directory.CreateDirectory(_reviewPath);
 
             LoadAllDecksFromDisk();
         }
 
         public void LoadAllDecksFromDisk()
         {
-            List<Deck> deckFiles = new ();
+            List<Deck> deckFiles = new();
 
             foreach (string deckPath in Directory.EnumerateFiles(_deckPath, "*.json"))
             {
@@ -51,7 +45,7 @@ namespace EZFlash.Models
 
         public void SaveAllDecksToDisk()
         {
-            if(Inventory.Decks != null)
+            if (Inventory.Decks != null)
                 foreach (Deck deck in Inventory.Decks)
                     SaveDeckToDisk(deck);
         }
