@@ -18,8 +18,8 @@
         public static float GoodStartInterval => BaseInterval * GoodStartFactor;
         public static float EasyStartInterval => BaseInterval * EasyStartFactor;
 
-        public static float AgainMultiplier { get; set; } = 1f;
-        public static float HardMultiplier { get; set; } = 0.5f;
+        public static float AgainMultiplier { get; set; } = 0.5f;
+        public static float HardMultiplier { get; set; } = 1f;
         public static float GoodMultiplier { get; set; } = 1.2f;
         public static float EasyMultiplier { get; set; } = 1.5f;
 
