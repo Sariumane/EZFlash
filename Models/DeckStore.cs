@@ -104,9 +104,10 @@ namespace EZFlash.Models
         {
             if (deck != null)
             {
-                File.Delete(Path.Combine(_deckPath, deck.Id.ToString()) + ".json"); 
+                File.Delete(Path.Combine(_deckPath, deck.Id.ToString()) + ".json");
                 Inventory.RemoveDeck(deck);
             }
         }
+
     }
 }

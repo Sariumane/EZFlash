@@ -31,7 +31,7 @@ public partial class App : Application
     {
         if (_deckStore != null)
         {
-            _deckStore?.SaveAllDecksToDisk();
+            //_deckStore?.SaveAllDecksToDisk();
             _settingsStore?.SaveSettingsToDisk();
         }
 

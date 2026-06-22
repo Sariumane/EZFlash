@@ -213,7 +213,21 @@ public class MainViewModel : ViewModelBase
 
     private void SaveNewDeck(string newDeckName)
     {
-        Deck deck = _deckStore.Inventory.AddDeck(newDeckName);
+        string trimmedName = newDeckName.Trim();
+
+        if (string.IsNullOrWhiteSpace(trimmedName))
+            return;
+
+        bool deckAlreadyExists = _deckStore.Inventory.Decks.Any(deck =>
+            string.Equals(
+                deck.Name.Trim(),
+                trimmedName,
+                StringComparison.CurrentCultureIgnoreCase));
+
+        if (deckAlreadyExists)
+            return;
+
+        Deck deck = _deckStore.Inventory.AddDeck(trimmedName);
         _deckStore.SaveDeckToDisk(deck);
     }
 

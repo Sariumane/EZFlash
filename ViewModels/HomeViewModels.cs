@@ -42,7 +42,7 @@ namespace EZFlash.ViewModels
 
         public bool CanCreateDeck => NewDeckName != "";
 
-        public ObservableCollection<Deck> Library { get; init; }
+        public ObservableCollection<Deck> Library { get; private set; }
         public ICommand StartLearnScheduledCommand { get; }
         public ICommand StartLearnFreeCommand { get; }
         public ICommand EditDeckCommand { get; }
@@ -67,16 +67,29 @@ namespace EZFlash.ViewModels
             SaveNewDeckCommand = new RelayCommand(() => 
             {
                 saveDeck(NewDeckName);
+
+                SortLibraryByName();
+
                 NewDeckName = "";
                 OnPropertyChanged(nameof(NewDeckName));
-                    
             });
 
             _saveExistingDeck = saveExistingDeck;
 
             NewDeckName = "";
         }
-       
+
+        private void SortLibraryByName()
+        {
+            List<Deck> sortedDecks = Library
+                .OrderBy(deck => deck.Name, StringComparer.CurrentCultureIgnoreCase)
+                .ToList();
+
+            Library.Clear();
+
+            foreach (Deck deck in sortedDecks)
+                Library.Add(deck);
+        }
 
         private void RenameSelectedDeck()
         {

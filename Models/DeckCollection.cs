@@ -11,7 +11,7 @@ namespace EZFlash.Models
         public Deck AddDeck(string title)
         {
             Deck deck = new(title);
-            Decks.Add(new(title));
+            Decks.Add(deck);
             return deck;
         }
         public void AddDeck(Deck deck) => Decks.Add(deck);
