@@ -8,7 +8,8 @@
              xmlns:vm="clr-namespace:EZFlash.ViewModels"
              xmlns:views="clr-namespace:EZFlash.Views"
              Focusable="True"
-             Loaded="UserControl_Loaded">
+             Loaded="UserControl_Loaded"
+             IsVisibleChanged="UserControl_IsVisibleChanged">
 
     <UserControl.Resources>
         <DataTemplate DataType="{x:Type vm:CreateOrEditCardViewModel}">
