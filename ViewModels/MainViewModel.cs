@@ -18,6 +18,8 @@ public class MainViewModel : ViewModelBase
     private DeckStore _deckStore;
     private SettingsStore _settingsStore;
 
+    private Review? _currentReviewResult;
+
     public ViewModelBase CurrentViewModel
     {
         get => _currentViewModel;
@@ -57,7 +59,12 @@ public class MainViewModel : ViewModelBase
 
         _learningViewModel = new LearningViewModel(SaveExistingDeck);
 
-        _learningResultViewModel = new LearningResultViewModel(ShowHomeView);
+        _learningResultViewModel = new LearningResultViewModel(
+             ShowHomeView,
+             ShowReviewLogView,
+             ShowOlderReviewResult,
+             ShowNewerReviewResult
+         );
 
         _learningViewModel.LearningFinished += OnLearningFinished;
 
@@ -99,6 +106,8 @@ public class MainViewModel : ViewModelBase
 
     private void OnLearningFinished(LearningMode mode, IReadOnlyList<CardReviewResult> results)
     {
+        _currentReviewResult = null;
+
         _learningResultViewModel.Load(mode, results);
         CurrentViewModel = _learningResultViewModel;
     }
@@ -125,13 +134,81 @@ public class MainViewModel : ViewModelBase
     private void ShowReviewLogView()
     {
         _reviewLogViewModel.RefreshReviews();
+
+        if (_currentReviewResult != null)
+            _reviewLogViewModel.SelectedReview = _currentReviewResult;
+
         CurrentViewModel = _reviewLogViewModel;
     }
 
     private void ShowReviewResult(Review review)
     {
+        _currentReviewResult = review;
+
         _learningResultViewModel.LoadFromReview(review);
+        UpdateReviewResultNavigationState();
+
         CurrentViewModel = _learningResultViewModel;
+    }
+
+    private void ShowOlderReviewResult()
+    {
+        int currentIndex = GetCurrentReviewIndex();
+
+        if (currentIndex < 0)
+            return;
+
+        int olderIndex = currentIndex + 1;
+
+        if (olderIndex >= _reviewLogViewModel.Reviews.Count)
+            return;
+
+        ShowReviewResult(_reviewLogViewModel.Reviews[olderIndex]);
+    }
+
+    private void ShowNewerReviewResult()
+    {
+        int currentIndex = GetCurrentReviewIndex();
+
+        if (currentIndex <= 0)
+            return;
+
+        int newerIndex = currentIndex - 1;
+
+        ShowReviewResult(_reviewLogViewModel.Reviews[newerIndex]);
+    }
+
+    private int GetCurrentReviewIndex()
+    {
+        if (_currentReviewResult == null)
+            return -1;
+
+        return _reviewLogViewModel.Reviews.IndexOf(_currentReviewResult);
+    }
+
+    private void UpdateReviewResultNavigationState()
+    {
+        int currentIndex = GetCurrentReviewIndex();
+        int totalReviews = _reviewLogViewModel.Reviews.Count;
+
+        bool canShowOlder =
+            currentIndex >= 0 &&
+            currentIndex < totalReviews - 1;
+
+        bool canShowNewer =
+            currentIndex > 0;
+
+        int currentPosition =
+            currentIndex >= 0
+                ? currentIndex + 1
+                : 0;
+
+        _learningResultViewModel.SetReviewNavigationState(
+            canShowOlder,
+            canShowNewer,
+            currentPosition,
+            totalReviews
+        );
     }
 
     private void SaveNewDeck(string newDeckName)

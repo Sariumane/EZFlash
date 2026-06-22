@@ -1,4 +1,5 @@
-﻿using EZFlash.Commands;
+﻿using System.Windows;
+using EZFlash.Commands;
 using EZFlash.Models;
 
 namespace EZFlash.ViewModels
@@ -6,12 +7,17 @@ namespace EZFlash.ViewModels
     public class LearningResultViewModel : ViewModelBase
     {
         private readonly Action _showHomeView;
+        private readonly Action _showReviewLogView;
+        private readonly Action _showOlderReview;
+        private readonly Action _showNewerReview;
 
         private bool _isLoadedFromReviewLog;
         private DateTime? _reviewedAt;
         private string _reviewDeckName = "";
 
-        public RelayCommand BackHomeCommand { get; }
+        public RelayCommand BackOverviewCommand { get; }
+        public RelayCommand ShowOlderReviewCommand { get; }
+        public RelayCommand ShowNewerReviewCommand { get; }
 
         public LearningMode Mode { get; private set; }
 
@@ -22,6 +28,16 @@ namespace EZFlash.ViewModels
         public int EasyCount { get; private set; }
 
         public double Score { get; private set; }
+
+        public string ReviewPositionText { get; private set; } = "";
+
+        public bool CanShowOlderReview { get; private set; }
+        public bool CanShowNewerReview { get; private set; }
+
+        public Visibility ReviewNavigationVisibility =>
+            _isLoadedFromReviewLog
+                ? Visibility.Visible
+                : Visibility.Collapsed;
 
         public string Title
         {
@@ -49,12 +65,35 @@ namespace EZFlash.ViewModels
             }
         }
 
+        public string BackOverviewText =>
+            _isLoadedFromReviewLog
+                ? "Zurück zu Stats"
+                : "Zurück zur Übersicht";
+
         public string ScoreText => $"{Score:0}%";
 
-        public LearningResultViewModel(Action showHomeView)
+        public LearningResultViewModel(
+            Action showHomeView,
+            Action showReviewLogView,
+            Action showOlderReview,
+            Action showNewerReview)
         {
             _showHomeView = showHomeView;
-            BackHomeCommand = new RelayCommand(_showHomeView);
+            _showReviewLogView = showReviewLogView;
+            _showOlderReview = showOlderReview;
+            _showNewerReview = showNewerReview;
+
+            BackOverviewCommand = new RelayCommand(GoBackToOverview);
+
+            ShowOlderReviewCommand = new RelayCommand(
+                _showOlderReview,
+                () => _isLoadedFromReviewLog && CanShowOlderReview
+            );
+
+            ShowNewerReviewCommand = new RelayCommand(
+                _showNewerReview,
+                () => _isLoadedFromReviewLog && CanShowNewerReview
+            );
         }
 
         public void Load(LearningMode mode, IReadOnlyList<CardReviewResult> results)
@@ -62,6 +101,9 @@ namespace EZFlash.ViewModels
             _isLoadedFromReviewLog = false;
             _reviewedAt = null;
             _reviewDeckName = "";
+
+            CanShowOlderReview = false;
+            CanShowNewerReview = false;
 
             Mode = mode;
 
@@ -75,6 +117,7 @@ namespace EZFlash.ViewModels
             Score = CalculateScore();
 
             NotifyAllResultPropertiesChanged();
+            NotifyNavigationPropertiesChanged();
         }
 
         public void LoadFromReview(Review review)
@@ -95,6 +138,32 @@ namespace EZFlash.ViewModels
             Score = CalculateScore();
 
             NotifyAllResultPropertiesChanged();
+            NotifyNavigationPropertiesChanged();
+        }
+
+        public void SetReviewNavigationState(
+            bool canShowOlderReview,
+            bool canShowNewerReview,
+            int currentReviewPosition,
+            int totalReviews)
+        {
+            CanShowOlderReview = canShowOlderReview;
+            CanShowNewerReview = canShowNewerReview;
+
+            ReviewPositionText =
+                totalReviews > 0
+                    ? $"{currentReviewPosition} / {totalReviews}"
+                    : "";
+
+            NotifyNavigationPropertiesChanged();
+        }
+
+        private void GoBackToOverview()
+        {
+            if (_isLoadedFromReviewLog)
+                _showReviewLogView();
+            else
+                _showHomeView();
         }
 
         private void NotifyAllResultPropertiesChanged()
@@ -102,6 +171,7 @@ namespace EZFlash.ViewModels
             OnPropertyChanged(nameof(Mode));
             OnPropertyChanged(nameof(Title));
             OnPropertyChanged(nameof(Subtitle));
+            OnPropertyChanged(nameof(BackOverviewText));
 
             OnPropertyChanged(nameof(TotalCards));
             OnPropertyChanged(nameof(AgainCount));
@@ -111,6 +181,17 @@ namespace EZFlash.ViewModels
 
             OnPropertyChanged(nameof(Score));
             OnPropertyChanged(nameof(ScoreText));
+        }
+
+        private void NotifyNavigationPropertiesChanged()
+        {
+            OnPropertyChanged(nameof(ReviewNavigationVisibility));
+            OnPropertyChanged(nameof(CanShowOlderReview));
+            OnPropertyChanged(nameof(CanShowNewerReview));
+            OnPropertyChanged(nameof(ReviewPositionText));
+
+            ShowOlderReviewCommand.RaiseCanExecuteChanged();
+            ShowNewerReviewCommand.RaiseCanExecuteChanged();
         }
 
         private double CalculateScore()

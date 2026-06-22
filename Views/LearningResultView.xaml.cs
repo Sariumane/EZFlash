@@ -12,6 +12,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using System.Windows.Threading;
 
 namespace EZFlash.Views
 {
@@ -23,6 +24,15 @@ namespace EZFlash.Views
         public LearningResultView()
         {
             InitializeComponent();
+        }
+
+        private void UserControl_Loaded(object sender, RoutedEventArgs e)
+        {
+            Dispatcher.BeginInvoke(new Action(() =>
+            {
+                Focus();
+                Keyboard.Focus(this);
+            }), DispatcherPriority.Input);
         }
     }
 }

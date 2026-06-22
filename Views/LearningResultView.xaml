@@ -1,6 +1,8 @@
 ﻿<UserControl x:Class="EZFlash.Views.LearningResultView"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             Focusable="True"
+             Loaded="UserControl_Loaded">
 
     <UserControl.Resources>
 
@@ -24,7 +26,31 @@
 
     </UserControl.Resources>
 
+    <UserControl.InputBindings>
+        <KeyBinding Key="Left"
+                    Command="{Binding ShowOlderReviewCommand}" />
+
+        <KeyBinding Key="Right"
+                    Command="{Binding ShowNewerReviewCommand}" />
+    </UserControl.InputBindings>
+    
     <Grid Background="{StaticResource Result.PageBackgroundBrush}">
+
+        <Border HorizontalAlignment="Right"
+                VerticalAlignment="Top"
+                Margin="0,36,34,0"
+                Padding="16,10"
+                Background="{StaticResource Result.CardBackgroundBrush}"
+                BorderBrush="{StaticResource Result.CardBorderBrush}"
+                BorderThickness="1"
+                CornerRadius="12"
+                Visibility="{Binding ReviewNavigationVisibility}">
+
+            <TextBlock Text="{Binding ReviewPositionText}"
+               Foreground="{StaticResource Result.PrimaryTextBrush}"
+               FontSize="16"
+               FontWeight="SemiBold"/>
+        </Border>
 
         <StackPanel HorizontalAlignment="Center"
                     VerticalAlignment="Center"
@@ -128,8 +154,24 @@
                         </StackPanel>
                     </Grid>
 
-                    <Button Content="Zurück zur Übersicht"
-                            Command="{Binding BackHomeCommand}"
+                    <StackPanel Orientation="Horizontal"
+            HorizontalAlignment="Center"
+            Margin="0,0,0,16"
+            Visibility="{Binding ReviewNavigationVisibility}">
+
+                        <Button Content="← Ältere Review"
+            Command="{Binding ShowOlderReviewCommand}"
+            Style="{StaticResource ResultButtonStyle}"
+            Margin="0,0,12,0"/>
+
+                        <Button Content="Neuere Review →"
+            Command="{Binding ShowNewerReviewCommand}"
+            Style="{StaticResource ResultButtonStyle}"/>
+
+                    </StackPanel>
+
+                    <Button Content="{Binding BackOverviewText}"
+                            Command="{Binding BackOverviewCommand}"
                             Style="{StaticResource ResultButtonStyle}"
                             HorizontalAlignment="Center" />
 
