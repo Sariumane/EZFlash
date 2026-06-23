@@ -7,12 +7,17 @@
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>
     <ApplicationIcon>Assets\EZFlash_icon.ico</ApplicationIcon>
+    <Platforms>AnyCPU;x64</Platforms>
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="Presentation\**" />
     <Compile Remove="TestData\**" />
+    <EmbeddedResource Remove="Presentation\**" />
     <EmbeddedResource Remove="TestData\**" />
+    <None Remove="Presentation\**" />
     <None Remove="TestData\**" />
+    <Page Remove="Presentation\**" />
     <Page Remove="TestData\**" />
   </ItemGroup>
 
@@ -24,6 +29,7 @@
     <None Remove="Assets\learn-free.png" />
     <None Remove="Assets\learn-scheduled.png" />
     <None Remove="Assets\rename.png" />
+    <None Remove="PromptVerzeichnis.pdf" />
   </ItemGroup>
 
   <ItemGroup>
