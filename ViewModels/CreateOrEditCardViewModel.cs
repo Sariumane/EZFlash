@@ -1,5 +1,4 @@
 ﻿using System.Windows.Input;
-using System.Windows.Navigation;
 using EZFlash.Commands;
 using EZFlash.Models;
 
@@ -9,13 +8,14 @@ namespace EZFlash.ViewModels
     public class CreateOrEditCardViewModel : ViewModelBase
     {
         private string _question = "";
-        public string Question {
+        public string Question
+        {
             get => _question;
             set
             {
                 _question = value;
                 OnPropertyChanged();
-            } 
+            }
         }
 
         private string _answer = "";
@@ -37,21 +37,22 @@ namespace EZFlash.ViewModels
 
 
         public CreateOrEditCardViewModel(Action cancel)
-        {  
+        {
             CancelCommand = new RelayCommand(cancel);
         }
 
         public void InitSaveCommand(Action save)
         {
-            SaveCommand = new RelayCommand(() => 
+            SaveCommand = new RelayCommand(() =>
             {
-                if(CardInEdit != null)
+                if (CardInEdit != null)
                 {
                     CardInEdit.Front = Question;
                     CardInEdit.Back = Answer;
-                    save(); 
+                    save();
                 }
             });
+            OnPropertyChanged(nameof(SaveCommand));
         }
     }
 }

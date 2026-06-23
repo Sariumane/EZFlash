@@ -19,6 +19,15 @@ public partial class App : Application
         _deckStore = new DeckStore();
         _settingsStore = new SettingsStore();
 
+        if (_deckStore.InvalidDeckFileCount > 0)
+        {
+            MessageBox.Show(
+                "Some deck files contained invalid data and could not be loaded.",
+                "Invalid Deck Files",
+                MessageBoxButton.OK,
+                MessageBoxImage.Warning);
+        }
+
         if (_settingsStore.UsedDefaultsBecauseSettingsWereInvalid)
         {
             MessageBox.Show(

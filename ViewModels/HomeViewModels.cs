@@ -4,7 +4,6 @@ using System.Windows.Input;
 using EZFlash.Commands;
 using EZFlash.Models;
 using EZFlash.Views;
-using System.Windows;
 
 namespace EZFlash.ViewModels
 {
@@ -50,12 +49,12 @@ namespace EZFlash.ViewModels
         public ICommand DeleteDeckCommand { get; }
         public ICommand RenameDeckCommand { get; }
 
-        public HomeViewModel(ObservableCollection<Deck> library, 
-            Action startLearnScheduled, 
-            Action startLearnFree, 
-            Action editDeck, 
-            Action deleteDeck, 
-            Action<string> saveDeck, 
+        public HomeViewModel(ObservableCollection<Deck> library,
+            Action startLearnScheduled,
+            Action startLearnFree,
+            Action editDeck,
+            Action deleteDeck,
+            Action<string> saveDeck,
             Action<Deck> saveExistingDeck)
         {
             Library = library;
@@ -64,7 +63,7 @@ namespace EZFlash.ViewModels
             EditDeckCommand = new RelayCommand(editDeck);
             RenameDeckCommand = new RelayCommand(RenameSelectedDeck);
             DeleteDeckCommand = new RelayCommand(deleteDeck);
-            SaveNewDeckCommand = new RelayCommand(() => 
+            SaveNewDeckCommand = new RelayCommand(() =>
             {
                 saveDeck(NewDeckName);
 
@@ -121,6 +120,16 @@ namespace EZFlash.ViewModels
                 return;
 
             if (newName == SelectedDeck.Name)
+                return;
+
+            bool deckAlreadyExists = Library.Any(deck =>
+                deck != SelectedDeck &&
+                string.Equals(
+                    deck.Name.Trim(),
+                    newName,
+                    StringComparison.CurrentCultureIgnoreCase));
+
+            if (deckAlreadyExists)
                 return;
 
             SelectedDeck.Name = newName;

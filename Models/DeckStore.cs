@@ -10,6 +10,7 @@ namespace EZFlash.Models
         private string _deckPath;
 
         public DeckCollection Inventory { get; private set; } = new();
+        public int InvalidDeckFileCount { get; private set; }
 
         public DeckStore()
         {
@@ -25,13 +26,21 @@ namespace EZFlash.Models
 
         public void LoadAllDecksFromDisk()
         {
+            InvalidDeckFileCount = 0;
+
             List<Deck> deckFiles = new();
 
             foreach (string deckPath in Directory.EnumerateFiles(_deckPath, "*.json"))
             {
                 Deck? deck = ReadDeckFromDisk(deckPath);
                 if (deck != null)
+                {
                     deckFiles.Add(deck);
+                }
+                else
+                {
+                    InvalidDeckFileCount++;
+                }
             }
 
             Inventory.Decks = new(deckFiles.OrderBy(deck => deck.Name, StringComparer.CurrentCultureIgnoreCase));
