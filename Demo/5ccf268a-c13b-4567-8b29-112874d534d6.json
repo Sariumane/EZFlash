@@ -1,0 +1,104 @@
+{
+  "Id": "5ccf268a-c13b-4567-8b29-112874d534d6",
+  "Name": "Demo: Debugging \u0026 Testing",
+  "NewCardLimit": 20,
+  "Cards": [
+    {
+      "Id": "964f43fc-e64b-4927-9e87-adba42a1a56c",
+      "CreatedAt": "2026-06-23T00:00:00Z",
+      "Front": "Was ist ein Breakpoint?",
+      "Back": "Eine Markierung, an der die Programmausfuehrung im Debugger angehalten wird.",
+      "ReviewedAt": null,
+      "NextReviewDate": null,
+      "Streak": 0,
+      "ReviewCount": 0,
+      "Interval": 0,
+      "LastRating": 0
+    },
+    {
+      "Id": "c2a710a4-a762-432a-84a1-53c37424f0cf",
+      "CreatedAt": "2026-06-23T00:00:00Z",
+      "Front": "Was prueft ein Unit Test?",
+      "Back": "Eine kleine, isolierte Einheit des Codes, zum Beispiel eine Methode.",
+      "ReviewedAt": null,
+      "NextReviewDate": null,
+      "Streak": 0,
+      "ReviewCount": 0,
+      "Interval": 0,
+      "LastRating": 0
+    },
+    {
+      "Id": "a1ef5404-614a-42b3-a217-097a8816a598",
+      "CreatedAt": "2026-06-23T00:00:00Z",
+      "Front": "Was ist ein Regressionstest?",
+      "Back": "Ein Test, der sicherstellt, dass ein bereits geloester Fehler nicht wieder auftaucht.",
+      "ReviewedAt": null,
+      "NextReviewDate": null,
+      "Streak": 0,
+      "ReviewCount": 0,
+      "Interval": 0,
+      "LastRating": 0
+    },
+    {
+      "Id": "3b7e4be6-0d8f-401e-93ad-0e32451a1ea1",
+      "CreatedAt": "2026-06-23T00:00:00Z",
+      "Front": "Was bedeutet Reproduzierbarkeit bei Bugs?",
+      "Back": "Der Fehler kann mit bekannten Schritten erneut ausgeloest werden.",
+      "ReviewedAt": null,
+      "NextReviewDate": null,
+      "Streak": 0,
+      "ReviewCount": 0,
+      "Interval": 0,
+      "LastRating": 0
+    },
+    {
+      "Id": "e61fe35b-06f7-4cd3-bbe5-94da8f286b54",
+      "CreatedAt": "2026-06-23T00:00:00Z",
+      "Front": "Was ist ein Stack Trace?",
+      "Back": "Eine Liste der Methodenaufrufe, die zu einer Exception gefuehrt haben.",
+      "ReviewedAt": null,
+      "NextReviewDate": null,
+      "Streak": 0,
+      "ReviewCount": 0,
+      "Interval": 0,
+      "LastRating": 0
+    },
+    {
+      "Id": "6d6e6e99-0b8c-43f6-a1cd-943cbf1c46cc",
+      "CreatedAt": "2026-06-23T00:00:00Z",
+      "Front": "Was ist Mocking?",
+      "Back": "Abhaengigkeiten werden durch kontrollierte Testobjekte ersetzt.",
+      "ReviewedAt": null,
+      "NextReviewDate": null,
+      "Streak": 0,
+      "ReviewCount": 0,
+      "Interval": 0,
+      "LastRating": 0
+    },
+    {
+      "Id": "172955cd-c416-4739-aaf4-3d5c356c90f3",
+      "CreatedAt": "2026-06-23T00:00:00Z",
+      "Front": "Was bedeutet Arrange, Act, Assert?",
+      "Back": "Teststruktur: vorbereiten, Aktion ausfuehren, Ergebnis pruefen.",
+      "ReviewedAt": null,
+      "NextReviewDate": null,
+      "Streak": 0,
+      "ReviewCount": 0,
+      "Interval": 0,
+      "LastRating": 0
+    },
+    {
+      "Id": "9e302b22-ff9c-4d3e-8bed-a227d39d3614",
+      "CreatedAt": "2026-06-23T00:00:00Z",
+      "Front": "Warum sind kleine Tests oft hilfreich?",
+      "Back": "Sie lokalisieren Fehler schneller und geben praeziseres Feedback.",
+      "ReviewedAt": null,
+      "NextReviewDate": null,
+      "Streak": 0,
+      "ReviewCount": 0,
+      "Interval": 0,
+      "LastRating": 0
+    }
+  ],
+  "ReviewLog": []
+}

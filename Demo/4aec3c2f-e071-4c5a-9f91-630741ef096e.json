@@ -1,0 +1,104 @@
+{
+  "Id": "4aec3c2f-e071-4c5a-9f91-630741ef096e",
+  "Name": "Demo: Git Essentials",
+  "NewCardLimit": 20,
+  "Cards": [
+    {
+      "Id": "dcfe9d77-4512-47c3-a45a-ae4987f0a52c",
+      "CreatedAt": "2026-06-23T00:00:00Z",
+      "Front": "Was zeigt \u0060git status\u0060?",
+      "Back": "Den Zustand des Arbeitsverzeichnisses und der Staging Area.",
+      "ReviewedAt": null,
+      "NextReviewDate": null,
+      "Streak": 0,
+      "ReviewCount": 0,
+      "Interval": 0,
+      "LastRating": 0
+    },
+    {
+      "Id": "9a130aa3-8462-4f3b-a430-e68f8fc8a35e",
+      "CreatedAt": "2026-06-23T00:00:00Z",
+      "Front": "Was macht \u0060git add\u0060?",
+      "Back": "Es nimmt Aenderungen in die Staging Area auf.",
+      "ReviewedAt": null,
+      "NextReviewDate": null,
+      "Streak": 0,
+      "ReviewCount": 0,
+      "Interval": 0,
+      "LastRating": 0
+    },
+    {
+      "Id": "048e0232-4245-4d36-8a5a-d11a3782ee35",
+      "CreatedAt": "2026-06-23T00:00:00Z",
+      "Front": "Was ist ein Commit?",
+      "Back": "Ein gespeicherter Snapshot der gestagten Aenderungen mit Nachricht.",
+      "ReviewedAt": null,
+      "NextReviewDate": null,
+      "Streak": 0,
+      "ReviewCount": 0,
+      "Interval": 0,
+      "LastRating": 0
+    },
+    {
+      "Id": "d7af3773-b9f0-47ed-b02f-47b47d7ab143",
+      "CreatedAt": "2026-06-23T00:00:00Z",
+      "Front": "Was macht ein Branch?",
+      "Back": "Er erlaubt eine separate Entwicklungslinie neben anderen Branches.",
+      "ReviewedAt": null,
+      "NextReviewDate": null,
+      "Streak": 0,
+      "ReviewCount": 0,
+      "Interval": 0,
+      "LastRating": 0
+    },
+    {
+      "Id": "9ccfa9d8-aee6-4ce9-86f4-2e12718f0682",
+      "CreatedAt": "2026-06-23T00:00:00Z",
+      "Front": "Was macht \u0060git merge\u0060?",
+      "Back": "Es integriert Aenderungen eines Branches in einen anderen.",
+      "ReviewedAt": null,
+      "NextReviewDate": null,
+      "Streak": 0,
+      "ReviewCount": 0,
+      "Interval": 0,
+      "LastRating": 0
+    },
+    {
+      "Id": "a5f018b5-7e7b-4419-8fab-2b14df70a437",
+      "CreatedAt": "2026-06-23T00:00:00Z",
+      "Front": "Was ist ein Merge Conflict?",
+      "Back": "Git kann Aenderungen nicht automatisch zusammenfuehren und braucht eine manuelle Entscheidung.",
+      "ReviewedAt": null,
+      "NextReviewDate": null,
+      "Streak": 0,
+      "ReviewCount": 0,
+      "Interval": 0,
+      "LastRating": 0
+    },
+    {
+      "Id": "3b87f25c-dc17-4c89-85c0-e19f6cae0936",
+      "CreatedAt": "2026-06-23T00:00:00Z",
+      "Front": "Was macht \u0060git pull\u0060?",
+      "Back": "Es holt Remote-Aenderungen und integriert sie in den aktuellen Branch.",
+      "ReviewedAt": null,
+      "NextReviewDate": null,
+      "Streak": 0,
+      "ReviewCount": 0,
+      "Interval": 0,
+      "LastRating": 0
+    },
+    {
+      "Id": "957ea970-e4d9-4516-a3d0-e2262b314b53",
+      "CreatedAt": "2026-06-23T00:00:00Z",
+      "Front": "Was macht \u0060git push\u0060?",
+      "Back": "Es uebertraegt lokale Commits in ein Remote Repository.",
+      "ReviewedAt": null,
+      "NextReviewDate": null,
+      "Streak": 0,
+      "ReviewCount": 0,
+      "Interval": 0,
+      "LastRating": 0
+    }
+  ],
+  "ReviewLog": []
+}

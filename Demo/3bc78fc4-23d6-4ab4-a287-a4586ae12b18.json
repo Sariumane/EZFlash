@@ -1,0 +1,104 @@
+{
+  "Id": "3bc78fc4-23d6-4ab4-a287-a4586ae12b18",
+  "Name": "Demo: C# Quick Facts",
+  "NewCardLimit": 20,
+  "Cards": [
+    {
+      "Id": "d88eeff6-56d8-49f8-885b-967d353bcf3a",
+      "CreatedAt": "2026-06-23T00:00:00Z",
+      "Front": "Wofuer steht \u0060var\u0060 in C#?",
+      "Back": "Der Compiler leitet den statischen Typ aus dem zugewiesenen Wert ab.",
+      "ReviewedAt": null,
+      "NextReviewDate": null,
+      "Streak": 0,
+      "ReviewCount": 0,
+      "Interval": 0,
+      "LastRating": 0
+    },
+    {
+      "Id": "ae3fdecd-fbbc-4642-8071-fe159c6c6c0f",
+      "CreatedAt": "2026-06-23T00:00:00Z",
+      "Front": "Was macht \u0060readonly\u0060?",
+      "Back": "Ein Feld kann nur bei Deklaration oder im Konstruktor gesetzt werden.",
+      "ReviewedAt": null,
+      "NextReviewDate": null,
+      "Streak": 0,
+      "ReviewCount": 0,
+      "Interval": 0,
+      "LastRating": 0
+    },
+    {
+      "Id": "971f989b-718e-4208-851d-1e51d195150b",
+      "CreatedAt": "2026-06-23T00:00:00Z",
+      "Front": "Was ist eine Property?",
+      "Back": "Ein kontrollierter Zugriff auf Daten ueber \u0060get\u0060 und optional \u0060set\u0060.",
+      "ReviewedAt": null,
+      "NextReviewDate": null,
+      "Streak": 0,
+      "ReviewCount": 0,
+      "Interval": 0,
+      "LastRating": 0
+    },
+    {
+      "Id": "85450f0c-1cb1-476e-8989-5d8c114714f6",
+      "CreatedAt": "2026-06-23T00:00:00Z",
+      "Front": "Was bedeutet \u0060async\u0060?",
+      "Back": "Die Methode kann asynchron arbeiten und typischerweise mit \u0060await\u0060 unterbrochen werden.",
+      "ReviewedAt": null,
+      "NextReviewDate": null,
+      "Streak": 0,
+      "ReviewCount": 0,
+      "Interval": 0,
+      "LastRating": 0
+    },
+    {
+      "Id": "a56b200d-1eb3-4f07-8680-1c73e8e8a458",
+      "CreatedAt": "2026-06-23T00:00:00Z",
+      "Front": "Was ist LINQ?",
+      "Back": "Eine C#-Syntax und API zum Abfragen und Transformieren von Datenquellen.",
+      "ReviewedAt": null,
+      "NextReviewDate": null,
+      "Streak": 0,
+      "ReviewCount": 0,
+      "Interval": 0,
+      "LastRating": 0
+    },
+    {
+      "Id": "76a749b2-751d-4505-a71e-413c36251150",
+      "CreatedAt": "2026-06-23T00:00:00Z",
+      "Front": "Was ist ein Namespace?",
+      "Back": "Ein Namensraum, der Typen gruppiert und Namenskonflikte reduziert.",
+      "ReviewedAt": null,
+      "NextReviewDate": null,
+      "Streak": 0,
+      "ReviewCount": 0,
+      "Interval": 0,
+      "LastRating": 0
+    },
+    {
+      "Id": "392a9523-0be3-4691-bcfd-7fc4eb6a075a",
+      "CreatedAt": "2026-06-23T00:00:00Z",
+      "Front": "Was macht \u0060using\u0060 am Dateianfang?",
+      "Back": "Es importiert Namespaces, damit Typnamen kuerzer verwendet werden koennen.",
+      "ReviewedAt": null,
+      "NextReviewDate": null,
+      "Streak": 0,
+      "ReviewCount": 0,
+      "Interval": 0,
+      "LastRating": 0
+    },
+    {
+      "Id": "ca0e3374-1f75-4c9c-9565-400effca9c02",
+      "CreatedAt": "2026-06-23T00:00:00Z",
+      "Front": "Was bedeutet Nullable Reference Types?",
+      "Back": "Der Compiler warnt, wenn Referenzwerte moeglicherweise null sind.",
+      "ReviewedAt": null,
+      "NextReviewDate": null,
+      "Streak": 0,
+      "ReviewCount": 0,
+      "Interval": 0,
+      "LastRating": 0
+    }
+  ],
+  "ReviewLog": []
+}

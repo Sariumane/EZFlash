@@ -1,0 +1,104 @@
+{
+  "Id": "2cb0c0cb-19d9-4604-9ddc-2c297edc3f64",
+  "Name": "Demo: OOP Concepts",
+  "NewCardLimit": 20,
+  "Cards": [
+    {
+      "Id": "f17506df-637b-4afa-871d-5ba098017b82",
+      "CreatedAt": "2026-06-23T00:00:00Z",
+      "Front": "Was ist eine Klasse?",
+      "Back": "Ein Bauplan fuer Objekte mit Daten und Verhalten.",
+      "ReviewedAt": null,
+      "NextReviewDate": null,
+      "Streak": 0,
+      "ReviewCount": 0,
+      "Interval": 0,
+      "LastRating": 0
+    },
+    {
+      "Id": "f8f11343-253f-47a4-a6e0-870a3c0aa7f4",
+      "CreatedAt": "2026-06-23T00:00:00Z",
+      "Front": "Was ist ein Objekt?",
+      "Back": "Eine konkrete Instanz einer Klasse mit eigenem Zustand.",
+      "ReviewedAt": null,
+      "NextReviewDate": null,
+      "Streak": 0,
+      "ReviewCount": 0,
+      "Interval": 0,
+      "LastRating": 0
+    },
+    {
+      "Id": "8a0f2d68-9f23-4b51-b494-81d3b27923f2",
+      "CreatedAt": "2026-06-23T00:00:00Z",
+      "Front": "Was bedeutet Kapselung?",
+      "Back": "Interne Daten werden geschuetzt und ueber klare Schnittstellen zugaenglich gemacht.",
+      "ReviewedAt": null,
+      "NextReviewDate": null,
+      "Streak": 0,
+      "ReviewCount": 0,
+      "Interval": 0,
+      "LastRating": 0
+    },
+    {
+      "Id": "54f20dce-9919-48c6-8427-2d9355969848",
+      "CreatedAt": "2026-06-23T00:00:00Z",
+      "Front": "Was ist Vererbung?",
+      "Back": "Eine Klasse uebernimmt Eigenschaften und Methoden einer anderen Klasse.",
+      "ReviewedAt": null,
+      "NextReviewDate": null,
+      "Streak": 0,
+      "ReviewCount": 0,
+      "Interval": 0,
+      "LastRating": 0
+    },
+    {
+      "Id": "3c7f557b-410d-4264-8515-20dfdb391ad4",
+      "CreatedAt": "2026-06-23T00:00:00Z",
+      "Front": "Was bedeutet Polymorphie?",
+      "Back": "Objekte koennen ueber eine gemeinsame Schnittstelle unterschiedlich reagieren.",
+      "ReviewedAt": null,
+      "NextReviewDate": null,
+      "Streak": 0,
+      "ReviewCount": 0,
+      "Interval": 0,
+      "LastRating": 0
+    },
+    {
+      "Id": "5bcaa609-1182-42c9-988e-a69ef4b0aaf7",
+      "CreatedAt": "2026-06-23T00:00:00Z",
+      "Front": "Was ist ein Interface?",
+      "Back": "Ein Vertrag, der festlegt, welche Mitglieder eine Klasse bereitstellen muss.",
+      "ReviewedAt": null,
+      "NextReviewDate": null,
+      "Streak": 0,
+      "ReviewCount": 0,
+      "Interval": 0,
+      "LastRating": 0
+    },
+    {
+      "Id": "041e4bf5-2afa-4693-b6ef-f19eb400d2b0",
+      "CreatedAt": "2026-06-23T00:00:00Z",
+      "Front": "Was ist ein Konstruktor?",
+      "Back": "Eine spezielle Methode, die ein Objekt beim Erzeugen initialisiert.",
+      "ReviewedAt": null,
+      "NextReviewDate": null,
+      "Streak": 0,
+      "ReviewCount": 0,
+      "Interval": 0,
+      "LastRating": 0
+    },
+    {
+      "Id": "0603ebd6-5aaa-4534-a0e2-3632a8a7ed54",
+      "CreatedAt": "2026-06-23T00:00:00Z",
+      "Front": "Was ist Komposition?",
+      "Back": "Ein Objekt besteht aus anderen Objekten und nutzt sie zur Umsetzung seines Verhaltens.",
+      "ReviewedAt": null,
+      "NextReviewDate": null,
+      "Streak": 0,
+      "ReviewCount": 0,
+      "Interval": 0,
+      "LastRating": 0
+    }
+  ],
+  "ReviewLog": []
+}

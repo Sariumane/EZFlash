@@ -1,0 +1,104 @@
+{
+  "Id": "1f6df0b0-92b8-4d0f-b7df-779cf68f5221",
+  "Name": "Demo: Programming Basics",
+  "NewCardLimit": 20,
+  "Cards": [
+    {
+      "Id": "d9a314a6-3655-497e-a15e-bc744e178d24",
+      "CreatedAt": "2026-06-23T00:00:00Z",
+      "Front": "Was ist eine Variable?",
+      "Back": "Ein benannter Speicherplatz fuer einen Wert, der im Programm verwendet werden kann.",
+      "ReviewedAt": null,
+      "NextReviewDate": null,
+      "Streak": 0,
+      "ReviewCount": 0,
+      "Interval": 0,
+      "LastRating": 0
+    },
+    {
+      "Id": "431339e1-5f58-430e-9498-8f87993d27b4",
+      "CreatedAt": "2026-06-23T00:00:00Z",
+      "Front": "Was macht eine if-Anweisung?",
+      "Back": "Sie fuehrt Code nur aus, wenn eine Bedingung wahr ist.",
+      "ReviewedAt": null,
+      "NextReviewDate": null,
+      "Streak": 0,
+      "ReviewCount": 0,
+      "Interval": 0,
+      "LastRating": 0
+    },
+    {
+      "Id": "a26d88b4-5028-4ea3-bdb2-cf9e6668085a",
+      "CreatedAt": "2026-06-23T00:00:00Z",
+      "Front": "Was ist eine Schleife?",
+      "Back": "Ein Kontrollfluss, der einen Codeblock mehrfach ausfuehrt.",
+      "ReviewedAt": null,
+      "NextReviewDate": null,
+      "Streak": 0,
+      "ReviewCount": 0,
+      "Interval": 0,
+      "LastRating": 0
+    },
+    {
+      "Id": "6953b52b-9444-48ef-99b6-af482ee6ffc3",
+      "CreatedAt": "2026-06-23T00:00:00Z",
+      "Front": "Was ist eine Funktion?",
+      "Back": "Ein benannter Codeblock, der eine Aufgabe ausfuehrt und optional Werte annimmt oder zurueckgibt.",
+      "ReviewedAt": null,
+      "NextReviewDate": null,
+      "Streak": 0,
+      "ReviewCount": 0,
+      "Interval": 0,
+      "LastRating": 0
+    },
+    {
+      "Id": "306f7dfc-dd60-4482-ae70-b14ad0c0c010",
+      "CreatedAt": "2026-06-23T00:00:00Z",
+      "Front": "Was bedeutet Boolean?",
+      "Back": "Ein Datentyp mit genau zwei moeglichen Werten: true oder false.",
+      "ReviewedAt": null,
+      "NextReviewDate": null,
+      "Streak": 0,
+      "ReviewCount": 0,
+      "Interval": 0,
+      "LastRating": 0
+    },
+    {
+      "Id": "81b0bf54-cc8f-489c-ac64-0c9ef1f6be66",
+      "CreatedAt": "2026-06-23T00:00:00Z",
+      "Front": "Was ist ein Array?",
+      "Back": "Eine Sammlung gleichartiger Werte, die ueber einen Index angesprochen werden.",
+      "ReviewedAt": null,
+      "NextReviewDate": null,
+      "Streak": 0,
+      "ReviewCount": 0,
+      "Interval": 0,
+      "LastRating": 0
+    },
+    {
+      "Id": "d13cb521-b176-41e3-99fd-f82195c85a08",
+      "CreatedAt": "2026-06-23T00:00:00Z",
+      "Front": "Was ist ein Kommentar im Code?",
+      "Back": "Text fuer Menschen, der vom Compiler oder Interpreter ignoriert wird.",
+      "ReviewedAt": null,
+      "NextReviewDate": null,
+      "Streak": 0,
+      "ReviewCount": 0,
+      "Interval": 0,
+      "LastRating": 0
+    },
+    {
+      "Id": "03c79462-e6b5-4f17-91e4-d8d969cb187f",
+      "CreatedAt": "2026-06-23T00:00:00Z",
+      "Front": "Was ist ein Bug?",
+      "Back": "Ein Fehler im Programm, der zu falschem oder unerwartetem Verhalten fuehrt.",
+      "ReviewedAt": null,
+      "NextReviewDate": null,
+      "Streak": 0,
+      "ReviewCount": 0,
+      "Interval": 0,
+      "LastRating": 0
+    }
+  ],
+  "ReviewLog": []
+}
