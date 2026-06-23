@@ -28,10 +28,10 @@ namespace EZFlash.ViewModels
         {
             _settingsStore = settingsStore;
 
-            LoadFromGlobalSettings();
-
-            SaveSettingsCommand = new RelayCommand(SaveSettings);
+            SaveSettingsCommand = new RelayCommand(SaveSettings, CanSaveSettings);
             ResetSettingsCommand = new RelayCommand(ResetSettings);
+
+            LoadFromGlobalSettings();
         }
 
         public float BaseUnit
@@ -42,6 +42,7 @@ namespace EZFlash.ViewModels
                 _baseUnit = value;
                 OnPropertyChanged();
                 OnPropertyChanged(nameof(BaseIntervalPreview));
+                SaveSettingsCommand.RaiseCanExecuteChanged();
             }
         }
 
@@ -53,6 +54,7 @@ namespace EZFlash.ViewModels
                 _againStartFactor = value;
                 OnPropertyChanged();
                 OnPropertyChanged(nameof(AgainStartPreview));
+                SaveSettingsCommand.RaiseCanExecuteChanged();
             }
         }
 
@@ -64,6 +66,7 @@ namespace EZFlash.ViewModels
                 _hardStartFactor = value;
                 OnPropertyChanged();
                 OnPropertyChanged(nameof(HardStartPreview));
+                SaveSettingsCommand.RaiseCanExecuteChanged();
             }
         }
 
@@ -75,6 +78,7 @@ namespace EZFlash.ViewModels
                 _goodStartFactor = value;
                 OnPropertyChanged();
                 OnPropertyChanged(nameof(GoodStartPreview));
+                SaveSettingsCommand.RaiseCanExecuteChanged();
             }
         }
 
@@ -86,6 +90,7 @@ namespace EZFlash.ViewModels
                 _easyStartFactor = value;
                 OnPropertyChanged();
                 OnPropertyChanged(nameof(EasyStartPreview));
+                SaveSettingsCommand.RaiseCanExecuteChanged();
             }
         }
 
@@ -96,6 +101,7 @@ namespace EZFlash.ViewModels
             {
                 _againMultiplier = value;
                 OnPropertyChanged();
+                SaveSettingsCommand.RaiseCanExecuteChanged();
             }
         }
 
@@ -106,6 +112,7 @@ namespace EZFlash.ViewModels
             {
                 _hardMultiplier = value;
                 OnPropertyChanged();
+                SaveSettingsCommand.RaiseCanExecuteChanged();
             }
         }
 
@@ -116,6 +123,7 @@ namespace EZFlash.ViewModels
             {
                 _goodMultiplier = value;
                 OnPropertyChanged();
+                SaveSettingsCommand.RaiseCanExecuteChanged();
             }
         }
 
@@ -126,6 +134,7 @@ namespace EZFlash.ViewModels
             {
                 _easyMultiplier = value;
                 OnPropertyChanged();
+                SaveSettingsCommand.RaiseCanExecuteChanged();
             }
         }
 
@@ -136,6 +145,7 @@ namespace EZFlash.ViewModels
             {
                 _streakWeight = value;
                 OnPropertyChanged();
+                SaveSettingsCommand.RaiseCanExecuteChanged();
             }
         }
 
@@ -173,6 +183,9 @@ namespace EZFlash.ViewModels
 
         private void SaveSettings()
         {
+            if (!CanSaveSettings())
+                return;
+
             GlobalSettings.BaseUnit = BaseUnit;
 
             GlobalSettings.AgainStartFactor = AgainStartFactor;
@@ -196,6 +209,25 @@ namespace EZFlash.ViewModels
             _settingsStore.SaveSettingsToDisk();
 
             LoadFromGlobalSettings();
+        }
+
+        private bool CanSaveSettings()
+        {
+            return !CurrentSettingsContainNegativeValues();
+        }
+
+        private bool CurrentSettingsContainNegativeValues()
+        {
+            return BaseUnit < 0
+                   || AgainStartFactor < 0
+                   || HardStartFactor < 0
+                   || GoodStartFactor < 0
+                   || EasyStartFactor < 0
+                   || AgainMultiplier < 0
+                   || HardMultiplier < 0
+                   || GoodMultiplier < 0
+                   || EasyMultiplier < 0
+                   || StreakWeight < 0;
         }
     }
 }

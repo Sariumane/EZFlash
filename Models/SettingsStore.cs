@@ -9,6 +9,8 @@ namespace EZFlash.Models
         private readonly string _appDir;
         private readonly string _settingsPath;
 
+        public bool UsedDefaultsBecauseSettingsWereInvalid { get; private set; }
+
         public SettingsStore()
         {
             _options.WriteIndented = true;
@@ -21,11 +23,19 @@ namespace EZFlash.Models
 
         public void LoadSettingsFromDisk()
         {
+            UsedDefaultsBecauseSettingsWereInvalid = false;
+
             AppSettings? settings = ReadSettingsFromDisk();
 
             if (settings == null)
             {
                 settings = new AppSettings();
+                SaveSettingsToDisk(settings);
+            }
+            else if (settings.ContainsNegativeValues())
+            {
+                settings = new AppSettings();
+                UsedDefaultsBecauseSettingsWereInvalid = true;
                 SaveSettingsToDisk(settings);
             }
 

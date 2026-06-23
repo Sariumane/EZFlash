@@ -18,6 +18,16 @@ public partial class App : Application
 
         _deckStore = new DeckStore();
         _settingsStore = new SettingsStore();
+
+        if (_settingsStore.UsedDefaultsBecauseSettingsWereInvalid)
+        {
+            MessageBox.Show(
+                "The settings file contained invalid values and was reset to default settings.",
+                "Invalid Settings",
+                MessageBoxButton.OK,
+                MessageBoxImage.Warning);
+        }
+
         _mainViewModel = new MainViewModel(_deckStore, _settingsStore);
         _mainWindow = new MainWindow
         {

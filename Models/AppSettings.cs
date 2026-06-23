@@ -15,5 +15,19 @@
         public float EasyMultiplier { get; set; } = 1.5f;
 
         public float StreakWeight { get; set; } = 0.1f;
+
+        public bool ContainsNegativeValues()
+        {
+            return BaseUnit < 0
+                   || AgainStartFactor < 0
+                   || HardStartFactor < 0
+                   || GoodStartFactor < 0
+                   || EasyStartFactor < 0
+                   || AgainMultiplier < 0
+                   || HardMultiplier < 0
+                   || GoodMultiplier < 0
+                   || EasyMultiplier < 0
+                   || StreakWeight < 0;
+        }
     }
 }
