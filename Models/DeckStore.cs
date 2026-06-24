@@ -44,11 +44,6 @@ namespace EZFlash.Models
             }
 
             Inventory.Decks = new(deckFiles.OrderBy(deck => deck.Name, StringComparer.CurrentCultureIgnoreCase));
-
-            string debugOutput = new("");
-
-            foreach (Deck deck in Inventory.Decks)
-                debugOutput += (deck.Name + "\n");
         }
 
 

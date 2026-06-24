@@ -90,7 +90,6 @@ Free learning reviews every card in the selected deck once, independent of wheth
 
 Scheduled learning only shows cards whose next review date is due. Ratings update each card's interval and next review date.
 
-If you use different filenames, update the image links in the `Screenshots` section.
 
 ## License
 

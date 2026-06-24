@@ -11,13 +11,25 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="Demo\**" />
+    <Compile Remove="docs\**" />
     <Compile Remove="Presentation\**" />
+    <Compile Remove="publish\**" />
     <Compile Remove="TestData\**" />
+    <EmbeddedResource Remove="Demo\**" />
+    <EmbeddedResource Remove="docs\**" />
     <EmbeddedResource Remove="Presentation\**" />
+    <EmbeddedResource Remove="publish\**" />
     <EmbeddedResource Remove="TestData\**" />
+    <None Remove="Demo\**" />
+    <None Remove="docs\**" />
     <None Remove="Presentation\**" />
+    <None Remove="publish\**" />
     <None Remove="TestData\**" />
+    <Page Remove="Demo\**" />
+    <Page Remove="docs\**" />
     <Page Remove="Presentation\**" />
+    <Page Remove="publish\**" />
     <Page Remove="TestData\**" />
   </ItemGroup>
 
