@@ -4,13 +4,21 @@ EZFlash is a WPF desktop application for creating, managing, and reviewing flash
 
 ## Screenshots
 
-> Replace the placeholder files with your own UI screenshots.
+### Main Deck Overview
 
 ![Home view](docs/images/home.png)
+---
+<br>
 
+### Card Management
 ![Card management](docs/images/card-management.png)
+---
+<br>
 
+### Learning Mode
 ![Learning mode](docs/images/learning-mode.png)
+---
+<br>
 
 ## Features
 
@@ -81,16 +89,6 @@ Free learning reviews every card in the selected deck once, independent of wheth
 ### Scheduled Learning
 
 Scheduled learning only shows cards whose next review date is due. Ratings update each card's interval and next review date.
-
-## Screenshots for GitHub
-
-Create a folder named `docs/images/` and place your screenshots there. The README currently expects these files:
-
-```text
-docs/images/home.png
-docs/images/card-management.png
-docs/images/learning-mode.png
-```
 
 If you use different filenames, update the image links in the `Screenshots` section.
 
